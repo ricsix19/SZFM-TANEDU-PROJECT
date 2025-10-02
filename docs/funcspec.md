@@ -3,10 +3,10 @@
 ## 1. Bevezetés  
 
 ### 1.1 Cél  
-A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztrációs felületet biztosítson: hallgatói adatok kezelése, tantárgyak, órarend, jegyek, vizsgák, üzenetek, valamint tanári és adminisztratív funkciók támogatása.  
+A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztrációs felületet biztosítson: hallgatói adatok kezelése, tantárgyak, órarend, jegyek, üzenetek, valamint tanári és adminisztratív funkciók támogatása.  
 
 ### 1.2 Hatókör  
-- Hallgatói felület (bejelentkezés, adatmegjelenítés, vizsgajelentkezés stb.)  
+- Hallgatói felület (bejelentkezés, adatmegjelenítés stb.)  
 - Oktatói felület (órarend kezelése, jegybeírás, vizsgák kiírása, üzenetek)  
 - Adminisztrátori modul (felhasználói jogosultságok, intézményi beállítások)  
 - Értesítések / üzenetküldés  
@@ -16,7 +16,7 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 - **Hallgató**: aki felhasználóként be tud lépni, tantárgyakat vesz fel  
 - **Tantárgy**: kurzus, amelyhez órák kapcsolódnak  
 - **Órarend**: heti beosztás tantárgyakkal, termekkel  
-- **Jegy**: vizsga vagy féléves értékelés  
+- **Jegy**: Témazáró vagy szimpla dolgozat értékelés  
 
 ---
 
@@ -24,8 +24,8 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 
 | Szerep        | Jogosultságok / tevékenységek |
 |---------------|--------------------------------|
-| Hallgató      | Tantárgyfelvétel, vizsgajelentkezés, órarend megtekintése, jegyek, személyes adatok kezelése |
-| Oktató        | Tantárgyakhoz órák hozzárendelése, jegybeírás, vizsgák kiírása, üzenetek kezelése |
+| Hallgató      | Tantárgyfelvétel, órarend megtekintése, jegyek, személyes adatok kezelése, témazárók megtekintése |
+| Oktató        | Tantárgyakhoz órák hozzárendelése, jegybeírás, témazárók kiírása, üzenetek kezelése |
 | Osztályfőnök | Csoportos műveletek, statisztikák, üzenetek csoportnak |
 | Rendszergazda         | Felhasználók kezelése, jogosultságok, intézményi beállítások, rendszerszintű konfiguráció |
 
@@ -45,22 +45,12 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 
 ### 3.3 Tantárgyak és kurzusok  
 - Tantárgy létrehozása / szerkesztése / törlése (Rendszergazda jogkör) 
-- Tantárgyhoz órák hozzárendelése (előadás, gyakorlat, labor)  
-- Kapacitás, kredit, előfeltétel beállítása  
+- Tantárgyak hallgatókhoz rendelése
 
 ### 3.4 Órarend kezelése  
 - Órák időpontjának és teremének kiosztása  
 - Ütközés-ellenőrzés  
 - Hallgatói órarend generálása  
-
-### 3.5 Tantárgyfelvétel  
-- Hallgató kiválaszt tantárgyakat adott félévre  
-- Ellenőrzés: előfeltételek, maximális kreditek, ütközések  
-- Visszamondás / módosítás  
-
-### 3.6 Vizsgajelentkezés  
-- Vizsgák kiírása (dátum, terem, kapacitás)  
-- Hallgató jelentkezése, lemondása, módosítása  
 
 ### 3.7 Jegykezelés  
 - Jegyek felvitele, módosítása (oktató)  

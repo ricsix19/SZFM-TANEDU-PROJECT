@@ -74,10 +74,9 @@ A projekt célja egy olyan webes rendszer létrehozása, amely:
 |----------------|--------------------|------------------------------------------------------------------------|
 | Jogosultság    | Bejelentkezés      | Email/jelszó alapú belépés, hibás próbálkozás esetén hibaüzenet.        |
 | Felhasználói   | Tantárgymegjelenítés   | A diák csak azokat a tantárgyakat látja amelyekhez a Rendszergazda hozzárendelte |
-| Felhasználói   | Témazárójelentkezés  | A hallgató Témazáróra jelentkezhet.            |
 | Felhasználói   | Jegymegtekintés    | A hallgató saját jegyeit és statisztikáit láthatja.                     |
 | Oktatói        | Jegybeírás         | Az oktató rögzítheti, módosíthatja a hallgatók eredményeit.             |
-| Oktatói        | Témazárók kezelése   | Oktató Témazárókat írhat ki, időponttal, teremmel és kapacitással.        |
+| Oktatói        | Témazárók kezelése   | Oktató Témazárókat írhat ki, időponttal.       |
 | Rendszergazda | Felhasználókezelés | Rendszergazda felveszi, törli és jogosultsággal látja el az Oktatókat.      |
 | Rendszergazda | Tantárgykezelés    | Rendszergazda létrehozhat, módosíthat vagy törölhet tantárgyakat.               |
 | Egyéb          | Értesítések        | A rendszer automatikus üzeneteket küld (pl. Érdemjegy beírás).    |
