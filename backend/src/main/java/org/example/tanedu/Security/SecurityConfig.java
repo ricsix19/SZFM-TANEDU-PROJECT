@@ -38,14 +38,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Updated configuration for Spring Security 6.x
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/auth/**", "/api/test/all").permitAll()
+                                .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                                .requestMatchers("/api/auth/logout").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
                                 .anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

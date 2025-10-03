@@ -3,6 +3,7 @@ package org.example.tanedu.Service;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                Collections.emptyList()
+                Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()))
         );
     }
+
 }
