@@ -1,6 +1,9 @@
 package org.example.tanedu.Controller;
 
+import org.example.tanedu.Model.Department;
+import org.example.tanedu.Model.Role;
 import org.example.tanedu.Model.User;
+import org.example.tanedu.Repository.DepartmentRepository;
 import org.example.tanedu.Repository.UserRepository;
 import org.example.tanedu.Security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +27,8 @@ public class AuthController {
     AuthenticationManager authenticationManager;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    DepartmentRepository departmentRepository;
     @Autowired
     PasswordEncoder encoder;
     @Autowired
@@ -71,8 +73,20 @@ public class AuthController {
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
         newUser.setPassword(encoder.encode(user.getPassword()));
+        if (user.getRole() != Role.STUDENT &&
+                user.getRole() != Role.TEACHER &&
+                user.getRole() != Role.SYSADMIN &&
+                user.getRole() != Role.CLASSLEADER) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Bad role provided please chose from these: TEACHER, STUDENT, SYSADMIN, CLASSLEADER");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
         newUser.setRole(user.getRole());
-        newUser.setDepartment(user.getDepartment());
+        if (user.getDepartment() != null && user.getDepartment().getId() != null) {
+            Department department = departmentRepository.findById(user.getDepartment().getId())
+                    .orElseThrow(() -> new RuntimeException("Department not found with id: " + user.getDepartment().getId()));
+            newUser.setDepartment(department);
+        }
 
         userRepository.save(newUser);
 
@@ -83,7 +97,6 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<?> logOut() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         if (authentication != null && authentication.isAuthenticated()) {
             SecurityContextHolder.clearContext();
 
@@ -96,4 +109,38 @@ public class AuthController {
         error.put("error", "No active session found");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "No active session found");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+        }
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User foundUser = userRepository.findByEmail(userDetails.getUsername());
+
+        if (foundUser == null) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+
+        String newPassword = request.get("password");
+        if (newPassword == null || newPassword.isEmpty()) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Password is required");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+
+        foundUser.setPassword(encoder.encode(newPassword));
+        userRepository.save(foundUser);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Successfully changed password");
+        return ResponseEntity.ok(response);
+    }
+
 }

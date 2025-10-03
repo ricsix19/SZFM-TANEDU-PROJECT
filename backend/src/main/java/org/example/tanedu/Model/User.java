@@ -1,5 +1,8 @@
 package org.example.tanedu.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +28,6 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private String department;
     private Date birthDate;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -34,7 +35,6 @@ public class User {
 
     @OneToMany(mappedBy = "teacher")
     private List<Course> courseList;
-
 
     @OneToMany(mappedBy = "student")
     private List<Grade> receivedGrades;
@@ -47,4 +47,13 @@ public class User {
 
     @OneToMany(mappedBy = "receiver")
     private List<Message> teacherMessages;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    @JsonIgnoreProperties({"students", "courseList"})
+    private Department department;
+
+    public String getFullName(){
+        return this.lastName +" "+ this.firstName;
+    }
 }

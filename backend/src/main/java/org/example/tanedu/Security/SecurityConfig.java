@@ -44,8 +44,16 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
-                                .requestMatchers("/api/auth/logout").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
+                                .requestMatchers("/api/auth/login").permitAll()
+//                                .requestMatchers("/api/auth/register").hasAuthority("SYSADMIN")
+//                                .requestMatchers("/api/auth/logout").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
+//                                .requestMatchers("/api/auth/change-password").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
+//
+//                                .requestMatchers("/api/users/getAll").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
+//                                .requestMatchers("/api/users/getById/*").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
+//                                .requestMatchers("/api/users/*").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
+//                                .requestMatchers("/api/users/delete/*").hasAuthority("SYSADMIN")
+                                .requestMatchers("/api/**").permitAll()
                                 .anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
