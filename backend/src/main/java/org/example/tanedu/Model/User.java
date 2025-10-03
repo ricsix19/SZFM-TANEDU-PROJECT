@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,7 +27,24 @@ public class User {
     private String password;
     @Column(nullable = false)
     private String department;
+    private Date birthDate;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courseList;
+
+
+    @OneToMany(mappedBy = "student")
+    private List<Grade> receivedGrades;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Grade> givenGrades;
+
+    @OneToMany(mappedBy = "sender")
+    private List<Message> studentMessages;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Message> teacherMessages;
 }
