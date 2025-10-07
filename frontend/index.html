@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bejelentkezés</title>
     <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
 </head>
-    <body>
-        <div class="login-container">
-            <h1>TanEdu Rendszer</h1>
-            <p class="subtitle">Kérlek, jelentkezz be a folytatáshoz</p>
-            <form id="loginForm" action="/login" method="POST">
-            <div class="form-group">
-                <label for="username">Felhasználónév</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Jelszó</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Bejelentkezés</button>
-            <div id="errorMsg" class="error-message" style="display: none;"></div>
-            </form>
-            <p class="footer-text">© 2025 TanEdu | Hallgatói rendszer</p>    
-        </div> 
-    </body>
+<body>
+    <div class="login-container">
+        <h1>TanEdu Rendszer</h1>
+        <p class="subtitle">Kérlek, jelentkezz be a folytatáshoz</p>
+        <form id="loginForm">
+        <div class="form-group">
+            <label for="username">Felhasználónév</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Jelszó</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Bejelentkezés</button>
+        <div id="errorMsg" class="error-message" style="display: none;"></div>
+        </form>
+        <p class="footer-text">© 2025 TanEdu | Hallgatói rendszer</p>    
+    </div> 
+</body>
 </html>
