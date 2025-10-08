@@ -185,7 +185,7 @@ button:hover {
     width: 100%;
 }
 
-.orarend-container {
+.tablazat-container {
     display: block;
     background: white;
     padding: 1.5em;
@@ -195,16 +195,18 @@ button:hover {
     margin: 0em .5em 0em .5em;
 }
 
-.orarend {
+.tablazat {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
     min-width: 700px;
     border-radius: 10px;
     overflow: hidden;
+    justify-content: center;
+    vertical-align: center;
 }
 
-.orarend th {
+.tablazat th {
     background: blue;
     color: white;
     padding: 1em;
@@ -212,15 +214,21 @@ button:hover {
     text-transform: uppercase;
 }
 
-.orarend td {
+.tablazat td {
     padding: 1em;
 }
 
-.orarend tr:nth-child(even) {
+.tablazat td:first-child {
+    text-align: center;
+    padding: .75em 0em .75em .75em;
+    width: 110px;
+}
+
+.tablazat tr:nth-child(even) {
     background-color: #ffffff;
 }
 
-.orarend tr:nth-child(odd) {
+.tablazat tr:nth-child(odd) {
     background-color: #eef5ff;
 }
 
