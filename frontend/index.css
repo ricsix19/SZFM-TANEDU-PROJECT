@@ -41,6 +41,7 @@ body {
     color: gray;
     font-weight: normal;
 }
+
 .login-container h1 {
     color: blue;
     font-size: 2.2em;
@@ -78,13 +79,12 @@ input:focus {
     outline: none;
 }
 
-
 button {
     width: 100%;
     padding: 0.75em;
     background-color: blue;
     color: beige;
-    border:none;
+    border: none;
     border-radius: 8px;
     font-size: 1em;
     font-weight: bold;
@@ -103,7 +103,6 @@ button:hover {
     text-align: center;
 }
 
-
 .footer-text {
     margin-top: 2em;
     font-size: 0.9em;
@@ -114,16 +113,16 @@ button:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     gap: 1.5em;
     background-color: lightblue;
-    padding: 2em;
+    padding: 1em;
     border-radius: 16px;
     box-shadow: 4px 12px 36px;
     width: 100%;
     max-width: 1125px;
     margin: 0 auto;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 
 .opciok, .nav-sor {
@@ -143,14 +142,14 @@ button:hover {
     color: rgba(0, 0, 255, 0.5);
 }
 
-.opciok a:hover{
+.opciok a:hover {
     text-decoration: underline;
 }
 
 .opciok {
     background-color: white;
     padding: 1em;
-    margin: .25em .75em .25em .75em;
+    margin: 1.5em 1em 1.5em 1em;
     border-radius: 16px;
     width: 160px;
     height: 160px;
@@ -174,7 +173,7 @@ button:hover {
 
 .nav-sor a {
     font-size: x-large;
-    padding: .15em 0.5em; 
+    padding: 0.15em 0.5em;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -184,11 +183,10 @@ button:hover {
 .nav-sor a span {
     display: flex;
     margin: auto;
-    padding: .1em 0em .1em 0em;
-    flex-direction: column; 
+    padding: 0.1em 0;
+    flex-direction: column;
     align-items: center;
 }
-
 
 .emoji {
     font-size: 4.55em;
@@ -211,7 +209,7 @@ button:hover {
     border-radius: 15px;
     max-width: 1000px;
     width: 90%;
-    margin: 0em .5em 0em .5em;
+    margin: 0 0.5em;
 }
 
 .tablazat {
@@ -239,15 +237,14 @@ button:hover {
 
 .tablazat td:first-child {
     text-align: center;
-    padding: .35em .1em 1em 0em;
+    padding: 0.35em 0.1em 1em 0;
     width: 150px;
     font-weight: bold;
     vertical-align: middle;
-    
 }
 
 .tablazat tr:nth-child(even) {
-    background-color: #ffffff;
+    background-color: white;
 }
 
 .tablazat tr:nth-child(odd) {
@@ -263,11 +260,83 @@ button:hover {
 
 .footer-text {
     text-align: center;
-    margin: 0.15em 0 0.15em 0;
+    margin: 0.15em 0;
     font-size: 1em;
     color: #555;
     width: 100%;
 }
+.fokusz-tartalom {
+    display: flex;
+    width: 100%;
+    gap: 1.5em; 
+}
+
+.oldalsav {
+    background-color: transparent;
+    padding: 0.5em;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.oldalsav button, .oldalsav a {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 0.1em;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.oldalsav button {
+    background-color: blue;
+    color: white;
+}
+
+.oldalsav a {
+    background-color: #add8e6;
+    color: black;
+}
+
+
+.uzenet-tartalom {
+    background-color: white;
+    padding: 1.5em;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+
+.uzenet-lista table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.uzenet-lista tr:nth-child(odd) {
+    background-color: white;
+}
+
+.uzenet-lista tr:nth-child(even) {
+    background-color: #eef5ff;
+}
+
+.uzenet-lista td {
+    padding: 0.75em;
+    text-align: left;
+}
+
+.uzenet-vezerelemek {
+    margin-top: 1em;
+    text-align: center;
+}
+
 
 @media (max-width: 480px) {
     .menu {
@@ -285,7 +354,7 @@ button:hover {
     }
     
     .login-container {
-    margin: 1em;
-    padding: 2em;
+        margin: 1em;
+        padding: 2em;
     }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Üzenetek</title>
     <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
 </head>
 <body>
     <div class="hatter">
@@ -15,9 +16,35 @@
             <a href="uzenetek.html"><span>📩</span>Üzenetek</a>
             <a href="adatok.html"><span>👤</span>Adatok</a>
         </div>
-        <p class="udvozles">Üzenetek</p>
+        <div class="fokusz-terulet">
+            <p class="udvozles">Üzenetek</p>
+            <div class="fokusz-tartalom">
+                <div class="oldalsav">
+                    <button>Üzenet küldése</button>
+                    <a href="#beérkezett">Beérkező levelek</a>
+                    <a href="#elküldött">Elküldött levelek</a>
+                </div>
+                <div class="uzenet-tartalom">
+                    <div class="uzenet-lista">
+                        <div class="uzenet-lista">
+                            <table>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="uzenet-vezerelemek">
+                        <label for="uzenet-darab">Üzenetek száma:</label>
+                        <select id="uzenet-darab">
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer class="footer-text">
-        © 2025 TanEdu | Hallgatói rendszer
+            © 2025 TanEdu | Hallgatói rendszer
         </footer>
     </div>
 </body>
