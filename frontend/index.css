@@ -114,7 +114,7 @@ button:hover {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1.5em;
+    gap: 1em;
     background-color: lightblue;
     padding: 1em;
     border-radius: 16px;
@@ -149,7 +149,7 @@ button:hover {
 .opciok {
     background-color: white;
     padding: 1em;
-    margin: 1.5em 1em 1.5em 1em;
+    margin: 1.5em 3em 1.5em 3em;
     border-radius: 16px;
     width: 160px;
     height: 160px;
@@ -282,7 +282,7 @@ button:hover {
 .oldalsav button, .oldalsav a {
     width: 100%;
     padding: 1em;
-    margin-bottom: 0.1em;
+    margin-bottom: .1em;
     border: none;
     border-radius: 8px;
     font-size: 1em;
@@ -292,19 +292,14 @@ button:hover {
     text-decoration: none;
 }
 
-.oldalsav button {
-    background-color: blue;
-    color: white;
-}
-
 .oldalsav a {
-    background-color: #add8e6;
+    background-color: transparent;
     color: black;
 }
 
-
 .uzenet-tartalom {
     background-color: white;
+    margin: .5em;
     padding: 1.5em;
     min-height: 70vh;
     display: flex;
@@ -320,11 +315,11 @@ button:hover {
 }
 
 .uzenet-lista tr:nth-child(odd) {
-    background-color: white;
+    background-color:  #eef5ff;
 }
 
 .uzenet-lista tr:nth-child(even) {
-    background-color: #eef5ff;
+    background-color: white;
 }
 
 .uzenet-lista td {
@@ -337,6 +332,27 @@ button:hover {
     text-align: center;
 }
 
+.jegyek-tablazat {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 1.1em;
+}
+
+.jegyek-tablazat td {
+    padding: 1em;
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+/* Sorok színezése */
+.jegyek-tablazat tr:nth-child(odd) {
+    background-color: #eef5ff;
+}
+.jegyek-tablazat tr:nth-child(even) {
+    background-color: white;
+}
 
 @media (max-width: 480px) {
     .menu {
