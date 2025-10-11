@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Üzenetek</title>
     <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
 </head>
 <body>
     <div class="hatter">
@@ -15,20 +14,19 @@
             <a href="uzenetek.html"><span>📩</span>Üzenetek</a>
             <a href="adatok.html"><span>👤</span>Adatok</a>
         </div>
+
         <div class="fokusz-terulet">
             <p class="udvozles">Üzenetek</p>
             <div class="fokusz-tartalom">
                 <div class="oldalsav">
-                    <button type="submit">Üzenet küldése</button>
-                    <a href="#beérkezett">Beérkező üzenetek</a>
-                    <a href="#elküldött">Elküldött üzenetek</a>
+                    <button id="openMessageBtn" type="button">Üzenet küldése</button>
+                    <a href="#beerkezett">Beérkező üzenetek</a>
+                    <a href="#elkuldott">Elküldött üzenetek</a>
                 </div>
+
                 <div class="uzenet-tartalom">
                     <div class="uzenet-lista">
-                        <div class="uzenet-lista">
-                            <table>
-                            </table>
-                        </div>
+                        <table></table>
                     </div>
                     <div class="uzenet-vezerelemek">
                         <label for="uzenet-darab">Üzenetek száma:</label>
@@ -39,9 +37,31 @@
                 </div>
             </div>
         </div>
+
+        <div id="uzenetModal" class="modal">
+            <div class="modal-tartalom">
+                <span class="close">&times;</span>
+                <h2>Új üzenet küldése</h2>
+                <form id="uzenetForm">
+                    <label for="cimzett">Címzett:</label>
+                    <input type="text" id="cimzett" name="cimzett" placeholder="pl. tanar@iskola.hu" required>
+
+                    <label for="targy">Tárgy:</label>
+                    <input type="text" id="targy" name="targy" placeholder="Tárgy" required>
+
+                    <label for="uzenet">Üzenet:</label>
+                    <textarea id="uzenet" name="uzenet" rows="5" placeholder="Írd ide az üzeneted..." required></textarea>
+
+                    <button type="submit">Küldés</button>
+                </form>
+            </div>
+        </div>
+
         <footer class="footer-text">
             © 2025 TanEdu | Hallgatói rendszer
         </footer>
     </div>
+
+    <script src="index.js"></script>
 </body>
 </html>

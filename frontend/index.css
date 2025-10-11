@@ -266,6 +266,7 @@ button:hover {
     color: #555;
     width: 100%;
 }
+
 .fokusz-tartalom {
     display: flex;
     width: 100%;
@@ -313,19 +314,32 @@ button:hover {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    border: 1px solid #ddd;
 }
 
-.uzenet-lista tr:nth-child(odd) {
-    background-color:  #eef5ff;
+.uzenet-lista th {
+    background-color: #f5f5f5;
+    padding: 1em;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
 }
 
-.uzenet-lista tr:nth-child(even) {
-    background-color: white;
+.uzenet-lista tr:hover {
+    background-color: #f0f8ff;
 }
 
 .uzenet-lista td {
-    padding: 0.75em;
+    padding: 1.5em; 
     text-align: left;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uzenet-lista td:first-child {
+    font-weight: bold;
+    color: blue;
 }
 
 .uzenet-vezerelemek {
@@ -347,13 +361,106 @@ button:hover {
     transition: all 0.25s ease;
 }
 
-/* Sorok színezése */
 .jegyek-tablazat tr:nth-child(odd) {
     background-color: #eef5ff;
 }
+
 .jegyek-tablazat tr:nth-child(even) {
     background-color: white;
 }
+
+.uzenet-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    z-index: 1000;
+}
+
+.modal-tartalom {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-tartalom h3 {
+    margin-bottom: 5px;
+    color: blue;
+}
+
+.modal-tartalom p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.modal-gombok {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-direction: row-reverse;
+}
+
+.modal-gombok button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#kuldes {
+    background-color: blue;
+    color: white;
+}
+
+#megse {
+    background-color: gray;
+    color: white;
+}
+
+#kuldes:hover { background-color: #0000cc; }
+#megse:hover { background-color: #555; }
+
+.lapozo {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 1em;
+}
+
+.lapozo .oldalGomb {
+    background-color: white;
+    border: 1px solid gray;
+    padding: 0.4em 0.8em;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.lapozo .oldalGomb:hover {
+    background-color: #d0d0ff;
+}
+
+.lapozo .oldalGomb.aktiv {
+    background-color: blue;
+    color: white;
+    border-color: blue;
+}
+
 
 @media (max-width: 480px) {
     .menu {
@@ -373,5 +480,10 @@ button:hover {
     .login-container {
         margin: 1em;
         padding: 2em;
+    }
+
+    .uzenet-lista td {
+        font-size: 0.9em;
+        padding: 1em;
     }
 }
