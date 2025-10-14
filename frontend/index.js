@@ -134,21 +134,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // === ÜZENETEK OLDAL ===
     if (window.location.pathname.endsWith("uzenetek.html")) {
-        const modal = document.getElementById("uzenetModal");
-        const openBtn = document.getElementById("openMessageBtn");
-        const closeBtn = document.querySelector(".close");
-        const form = document.getElementById("uzenetForm");
-        const tabla = document.querySelector(".uzenet-lista table");
-        const vezerelemek = document.querySelector(".uzenet-vezerelemek");
-        const select = document.getElementById("uzenet-darab");
+    const felhasznalo = getFelhasznalo();
+    if (!felhasznalo) return; // 🔒 Ellenőrzés azonnal!
 
-        if (!modal || !openBtn || !closeBtn || !form || !tabla || !vezerelemek || !select) {
-            console.error("Hiányzó elem az üzenetek oldalról!");
-            return;
-        }
+    const modal = document.getElementById("uzenetModal");
+    const openBtn = document.getElementById("openMessageBtn");
+    const closeBtn = document.querySelector(".close");
+    const form = document.getElementById("uzenetForm");
+    const tabla = document.querySelector(".uzenet-lista table");
+    const vezerelemek = document.querySelector(".uzenet-vezerelemek");
+    const select = document.getElementById("uzenet-darab");
 
-        modal.hidden = true;
-        modal.setAttribute("aria-hidden", "true");
+    if (!modal || !openBtn || !closeBtn || !form || !tabla || !vezerelemek || !select) {
+        console.error("Hiányzó elem az üzenetek oldalról!");
+        return;
+    }
+
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+
 
         openBtn.addEventListener("click", () => {
             modal.hidden = false;
