@@ -1,23 +1,23 @@
-# TanEDU — Követelmény Specifikáció
+# TanEdu — Követelmény Specifikáció
 
 ### Áttekintés
 
-Az alkalmazás célja, hogy hallgatók, oktatók és adminisztrátorok számára átlátható és könnyen kezelhető felületet biztosítson a tanulmányi ügyek intézésére.  
-A rendszer támogatja a hallgatók tantárgyfelvételét, vizsgajelentkezését, jegyek megtekintését, az oktatók órarend- és jegykezelését, valamint az adminisztrátorok jogosultságkezelését és intézményi beállításait.  
+Az alkalmazás célja, hogy diákok, oktatók és adminisztrátorok számára átlátható és könnyen kezelhető felületet biztosítson a tanulmányi ügyek intézésére.  
+A rendszer támogatja a diákok jegyek megtekintését, az oktatók és diákok órarend kezelését és az oktatók jegykezelését, valamint az adminisztrátorok jogosultságkezelését és intézményi beállításait.  
 
 A felület kialakításánál elsődleges szempont az átláthatóság, a stabil működés és a reszponzív megjelenés.  
-A rendszer lehetővé teszi az értesítések és üzenetek továbbítását, valamint riportok és statisztikák készítését a hallgatók és oktatók teljesítményéről.  
+A rendszer lehetővé teszi az értesítések és üzenetek továbbítását, valamint riportok és statisztikák készítését a diákok és oktatók teljesítményéről.  
 
 ### Jelenlegi helyzet
 
 A jelenlegi oktatási adminisztrációs rendszerek sok esetben bonyolultak, nehezen átláthatók, és nem biztosítanak gyors hozzáférést a legfontosabb információkhoz.  
-A hallgatók nehézkesen tudják kezelni a tantárgyfelvételt és a vizsgajelentkezést, az oktatók pedig körülményesen rögzíthetik a jegyeket.  
+A diákok nehézkesen tudják kezelni az órarendjüket az oktatók pedig körülményesen rögzítik a jegyeket.  
 Az adminisztratív feladatok (felhasználókezelés, jogosultságok kiosztása, riportok készítése) sokszor időigényesek és nem elég felhasználóbarátak.  
 
 ### Vágyálom rendszer
 
 A projekt célja egy olyan webes rendszer létrehozása, amely:  
-- Egyszerűsíti a hallgatói, oktatói és adminisztrátori tevékenységeket.  
+- Egyszerűsíti a diákok, az oktatók és adminisztrátorok tevékenységeit.  
 - Átlátható felületet biztosít a legfontosabb tanulmányi adatokhoz.  
 - Stabil, gyors és skálázható működést nyújt.  
 - Támogatja a folyamatos kommunikációt (értesítések, üzenetek).  
@@ -27,14 +27,14 @@ A projekt célja egy olyan webes rendszer létrehozása, amely:
 
 | Kategória       | Funkció                  | Leírás                                                                 |
 |-----------------|--------------------------|------------------------------------------------------------------------|
-| Felhasználói    | Bejelentkezés és profil  | Hallgatók, oktatók és adminisztrátorok bejelentkezhetnek, profiladatok kezelése. |
-| Felhasználói    | Órarend megtekintése     | A hallgatók és oktatók saját órarendjüket megtekinthetik.              |
-| Felhasználói    | Jegymegtekintés          | A hallgatók elérhetik vizsga- és félév végi jegyeiket.                 |
-| Oktatói         | Jegybeírás               | Oktatók rögzíthetik és módosíthatják a hallgatói jegyeket.             |
-| Oktatói         | Vizsgák kiírása          | Oktatók időpontot, helyszínt és kapacitást adhatnak meg a vizsgákhoz.  |
+| Felhasználói    | Bejelentkezés és profil  | Diákok, oktatók és adminisztrátorok bejelentkezhetnek, profiladatok kezelése. |
+| Felhasználói    | Órarend megtekintése     | A diákok és oktatók saját órarendjüket megtekinthetik.              |
+| Felhasználói    | Jegymegtekintés          | A diákok elérhetik témazáró és félév során kapott jegyeiket.                 |
+| Oktatói         | Jegybeírás               | Oktatók rögzíthetik és módosíthatják a diákok jegyeit.             |
+| Oktatói         | Üzenetek küldése          | Oktatók üzenetet tudnak küldeni diákjaiknak, hogy értesíthetsék őket esetleges témazárókról, dolgozatokról.  |
 | Adminisztrációs | Jogosultságkezelés       | Az adminisztrátorok felhasználókat és jogosultságokat kezelnek.        |
 | Adminisztrációs | Tantárgy- és kurzuskezelés | Új tantárgyak létrehozása, módosítása, törlése, Oktatók és Diákokat kisorolni kurzusaikhoz.                        |
-| Adminisztrációs | Rendszerkonfiguráció     | Intézményi beállítások, kreditlimitek, szabályok rögzítése.            |
+| Adminisztrációs | Rendszerkonfiguráció     | Intézményi beállítások, szabályok rögzítése.            |
 | Egyéb           | Értesítések, üzenetküldés| Felhasználók közti kommunikáció és automatikus rendszerüzenetek.       |
 | Egyéb           | Riportok és statisztikák | Riportok, legfőbbkép statisztikák(átlag, etc.) készítése és megjelenítése |
 | Egyéb           | Naplózás                 | A rendszer minden változást naplóz, biztosítva az átláthatóságot.      |
@@ -48,7 +48,7 @@ A projekt célja egy olyan webes rendszer létrehozása, amely:
 
 ### Jelenlegi üzleti folyamatok modellje
 
-1. Hallgatói ügyintézés  
+1. Diák ügyintézés  
    - Témazáró dolgozatok figyelése és észben tartása 10+ tantárgynál körülményes.
    - Jegybeírás és -lekérdezés körülményes folyamat.  
 
@@ -74,21 +74,21 @@ A projekt célja egy olyan webes rendszer létrehozása, amely:
 |----------------|--------------------|------------------------------------------------------------------------|
 | Jogosultság    | Bejelentkezés      | Email/jelszó alapú belépés, hibás próbálkozás esetén hibaüzenet.        |
 | Felhasználói   | Tantárgymegjelenítés   | A diák csak azokat a tantárgyakat látja amelyekhez a Rendszergazda hozzárendelte |
-| Felhasználói   | Jegymegtekintés    | A hallgató saját jegyeit és statisztikáit láthatja.                     |
-| Oktatói        | Jegybeírás         | Az oktató rögzítheti, módosíthatja a hallgatók eredményeit.             |
+| Felhasználói   | Jegymegtekintés    | A diák saját jegyeit és statisztikáit láthatja.                     |
+| Oktatói        | Jegybeírás         | Az oktató rögzítheti, módosíthatja a diákok eredményeit.             |
 | Oktatói        | Témazárók kezelése   | Oktató Témazárókat írhat ki, időponttal.       |
 | Rendszergazda | Felhasználókezelés | Rendszergazda felveszi, törli és jogosultsággal látja el az Oktatókat.      |
 | Rendszergazda | Tantárgykezelés    | Rendszergazda létrehozhat, módosíthat vagy törölhet tantárgyakat.               |
 | Egyéb          | Értesítések        | A rendszer automatikus üzeneteket küld (pl. Érdemjegy beírás).    |
-| Egyéb          | Statisztikák           | Rendszer készít statisztikákat a hallgatók átlaguk és jegyeik alapján.         |
+| Egyéb          | Statisztikák           | Rendszer készít statisztikákat a diákok átlaguk és jegyeik alapján.         |
 | Rendszer       | Naplózás           | Minden módosítás és tranzakció naplózásra kerül.                        |
 
 ### Fogalomtár
 
 | Fogalom        | Meghatározás                                                                 |
 |----------------|----------------------------------------------------------------------------|
-| Hallgató       | A rendszer felhasználója, aki tantárgyakat vesz fel. |
-| Oktató         | Tanár, aki jegyeket rögzít, hallgatók hiányzását kezeli.              |
+| Diák       | A rendszer felhasználója, aki tantárgyakat vesz fel. |
+| Oktató         | Tanár, aki jegyeket rögzít, diákok hiányzását kezeli.              |
 | Rendszergazda | Jogosult felhasználó, aki kezeli a rendszer működését és beállításait.     |
-| Tantárgy       | Kurzus, amelyhez órák és hallgatók kapcsolódnak.                  |
-| Riport/Statisztikák        | Összesítés hallgatói és oktatói teljesítményről, tantárgyakról, vizsgákról.|
+| Tantárgy       | Kurzus, amelyhez órák és diákok kapcsolódnak.                  |
+| Riport/Statisztikák        | Összesítés a diákok és oktatók teljesítményéről, tantárgyakról, vizsgákról.|

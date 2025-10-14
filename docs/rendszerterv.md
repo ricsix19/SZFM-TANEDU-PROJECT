@@ -1,4 +1,4 @@
-# TanEDU – Rendszerterv
+# TanEdu – Rendszerterv
 
 ## 1. A rendszer célja
 A rendszer célja, hogy a hallgatók, oktatók és adminisztrátorok számára egy központi, 
@@ -46,8 +46,8 @@ biztonságos és felhasználóbarát felületet biztosítson a tanulmányi ügye
 ---
 
 ## 6. Jogosultságkezelés
-- **Hallgató:** saját adatok és kurzusok kezelése
-- **Oktató:** saját kurzusok és hallgatók kezelése
+- **Hallgató/Diák:** saját adatok és tantárgy kezelése
+- **Oktató:** saját tantárgyak és hallgatók kezelése
 - **Rendszergazda:** teljes rendszer feletti kontroll
 
 ---

@@ -1,19 +1,19 @@
-# Funkcionális specifikáció — [TanEDU]
+# Funkcionális specifikáció — TanEdu
 
 ## 1. Bevezetés  
 
 ### 1.1 Cél  
-A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztrációs felületet biztosítson: hallgatói adatok kezelése, tantárgyak, órarend, jegyek, üzenetek, valamint tanári és adminisztratív funkciók támogatása.  
+A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztrációs felületet biztosítson: diák adatok kezelése, tantárgyak, órarend, jegyek, üzenetek, valamint tanári és adminisztratív funkciók támogatása.  
 
 ### 1.2 Hatókör  
-- Hallgatói felület (bejelentkezés, adatmegjelenítés stb.)  
+- Diák felület (bejelentkezés, adatmegjelenítés stb.)  
 - Oktatói felület (órarend kezelése, jegybeírás, vizsgák kiírása, üzenetek)  
 - Adminisztrátori modul (felhasználói jogosultságok, intézményi beállítások)  
 - Értesítések / üzenetküldés  
 - Adatkezelés és jelentések  
 
 ### 1.3 Definíciók, rövidítések  
-- **Hallgató**: aki felhasználóként be tud lépni, tantárgyakat vesz fel  
+- **Diák**: aki felhasználóként be tud lépni  
 - **Tantárgy**: kurzus, amelyhez órák kapcsolódnak  
 - **Órarend**: heti beosztás tantárgyakkal, termekkel  
 - **Jegy**: Témazáró vagy szimpla dolgozat értékelés  
@@ -24,7 +24,7 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 
 | Szerep        | Jogosultságok / tevékenységek |
 |---------------|--------------------------------|
-| Hallgató      | Tantárgyfelvétel, órarend megtekintése, jegyek, személyes adatok kezelése, témazárók megtekintése |
+| Diák      | Tantárgyfelvétel, órarend megtekintése, jegyek, személyes adatok kezelése, témazárók megtekintése |
 | Oktató        | Tantárgyakhoz órák hozzárendelése, jegybeírás, témazárók kiírása, üzenetek kezelése |
 | Osztályfőnök | Csoportos műveletek, statisztikák, üzenetek csoportnak |
 | Rendszergazda         | Felhasználók kezelése, jogosultságok, intézményi beállítások, rendszerszintű konfiguráció |
@@ -45,21 +45,21 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 
 ### 3.3 Tantárgyak és kurzusok  
 - Tantárgy létrehozása / szerkesztése / törlése (Rendszergazda jogkör) 
-- Tantárgyak hallgatókhoz rendelése
+- Tantárgyak diákokhoz rendelése
 
 ### 3.4 Órarend kezelése  
 - Órák időpontjának és teremének kiosztása  
 - Ütközés-ellenőrzés  
-- Hallgatói órarend generálása  
+- Diákoknak órarend generálása  
 
 ### 3.7 Jegykezelés  
 - Jegyek felvitele, módosítása (oktató)  
-- Jegyek megtekintése (hallgató)  
+- Jegyek megtekintése (diák)  
 - Statisztikák, átlagok  
 
 ### 3.8 Értesítések / üzenetküldés  
 - Rendszerüzenetek (pl. jegybeírás)  
-- Oktató–hallgató üzenetküldés  
+- Oktató–diák üzenetküldés  
   
 ### 3.9 Admin funkciók  
 - Felhasználók kezelése  
@@ -83,9 +83,9 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 
 | Use case         | Szereplő | Leírás | Előfeltételek | Eredmény |
 |------------------|----------|--------|---------------|----------|
-| Bejelentkezés    | Hallgató | Hallgató bejelentkezik a rendszerbe | Létezik felhasználói fiók | Sikeres belépés |
-| Tantárgyfelvétel | Hallgató/Rendszergazda | Rendszergazda hozzárendeli a hallgatót a tárgyhoz | Tantárgy osztályonként különbözik, nincs időbeli ütközés | Tantárgy hozzárendelődik az adott diákhoz |
+| Bejelentkezés    | Diák | Diák bejelentkezik a rendszerbe | Létezik felhasználói fiók | Sikeres belépés |
+| Tantárgyfelvétel | Diák/Rendszergazda | Rendszergazda hozzárendeli a diákot a tárgyhoz | Tantárgy osztályonként különbözik, nincs időbeli ütközés | Tantárgy hozzárendelődik az adott diákhoz |
 | Oktató hozzárendelés tárgyhoz | Oktató/Rendszergazda | A Rendszergazda hozzárendeli az oktatót a kurzushoz mint kurzus vezető | Az oktató adminisztraciós jellegű jogokkal rendelkezik | Oktató adminisztrátori jogosultságokkal rendelkezik a saját kirendelt kurzusában |
-| Érdemjegy felvitele  | Oktató   | Oktató rögzíti a hallgató jegyét | Hallgató/Diák sikeresen teljesítette a kurzus által megadott feltételeket | Jegy megjelenik a  Hallgató/Diák profilján |
+| Érdemjegy felvitele  | Oktató   | Oktató rögzíti a diák jegyét | Hallgató/Diák sikeresen teljesítette a kurzus által megadott feltételeket | Jegy megjelenik a  Hallgató/Diák profilján |
 
 ---
