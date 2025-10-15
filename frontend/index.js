@@ -16,7 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                const response = await fetch("https://localhost:8080/api/login", {
+                const felhasznalo = window.dummyFelhasznalok?.find(u => u.username === username && u.password === password);
+                if (!felhasznalo) throw new Error("Hibás felhasználónév vagy jelszó!");
+
+                localStorage.setItem("bejelentkezettFelhasznalo", JSON.stringify(felhasznalo));
+                window.location.href = "homepage.html";
+                /*const response = await fetch("https://localhost:8080/api/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ username, password })
@@ -33,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 localStorage.setItem("bejelentkezettFelhasznalo", JSON.stringify(felhasznalo));
-                window.location.href = "homepage.html";
+                window.location.href = "homepage.html";*/
             } catch (error) {
                 console.error("Bejelentkezési hiba:", error);
                 errorMsg.textContent = error.message || "Hiba történt a bejelentkezés során.";
@@ -82,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             felhasznalo.email,
             felhasznalo.kepzesNeve,
             felhasznalo.kezdesIdopontja,
+            felhasznalo.aktualisFelev,
             felhasznalo.varhatoVegzes
         ];
 
@@ -271,5 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.addEventListener("hashchange", renderUzenetek);
         renderUzenetek();
+    }
+        // === KIJELENTKEZÉS GOMB ===
+    const kijelentkezesBtn = document.getElementById("kijelentkezesBtn");
+    if (kijelentkezesBtn) {
+        kijelentkezesBtn.addEventListener("click", () => {
+            localStorage.removeItem("bejelentkezettFelhasznalo");
+            window.location.href = "index.html";
+        });
     }
 });
