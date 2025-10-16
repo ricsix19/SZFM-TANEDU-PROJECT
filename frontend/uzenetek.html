@@ -57,6 +57,20 @@
                 </form>
             </div>
         </div>
+        <!-- Üzenet megtekintése modal -->
+<div id="megtekintModal" class="modal" hidden aria-hidden="true">
+    <div class="modal-tartalom">
+        <span id="megtekintClose" class="close">&times;</span>
+        <h2 style="text-align:center;color:blue;">Üzenet részletei</h2>
+        <p><span class="data">Feladó:</span> <span id="megtekintFelado"></span></p>
+        <p><span class="data">Címzett:</span> <span id="megtekintCimzett"></span></p>
+        <p><span class="data">Tárgy:</span> <span id="megtekintTargy"></span></p>
+        <p><span class="data">Dátum:</span> <span id="megtekintDatum"></span></p>
+        <p><span class="data">Üzenet:</span></p>
+        <p id="megtekintUzenet" style="white-space: pre-wrap;"></p>
+    </div>
+</div>
+
 
         <footer class="footer-text">
             © 2025 TanEdu | Hallgatói rendszer
