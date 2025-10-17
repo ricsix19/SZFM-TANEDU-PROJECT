@@ -101,19 +101,53 @@ document.addEventListener("DOMContentLoaded", () => {
         const felhasznalo = getFelhasznalo();
         if (!felhasznalo) return;
 
-        const orarend = felhasznalo.orarend || {
-            hetfo: [], kedd: [], szerda: [], csutortok: [], pentek: []
-        };
+    const orarend = felhasznalo.orarend || {};
+    const napok = ["hetfo", "kedd", "szerda", "csutortok", "pentek"];
+    const sorok = document.querySelectorAll(".tablazat tbody tr");
 
-        const sorok = document.querySelectorAll(".tablazat tbody tr");
-        sorok.forEach((sor, index) => {
-            const cellak = sor.querySelectorAll("td");
-            const napok = ["hetfo", "kedd", "szerda", "csutortok", "pentek"];
-            napok.forEach((nap, i) => {
-                const span = cellak[i + 1]?.querySelector("span");
-                if (span) span.innerText = biztonsagosSzoveg(orarend[nap][index] || "–");
+    sorok.forEach((sor, index) => {
+        const cellak = sor.querySelectorAll("td");
+
+        napok.forEach((nap, i) => {
+        const cella = cellak[i + 1];
+        const napiOrak = orarend[nap] || [];
+        const ora = napiOrak[index];
+
+        if (ora && ora.targy) {
+            cella.innerHTML = `<strong>${biztonsagosSzoveg(ora.targy)}</strong><br>${biztonsagosSzoveg(ora.terem)}`;
+            cella.classList.add("orarend-ora");
+
+            cella.addEventListener("click", () => {
+            document.getElementById("oraCim").innerText = biztonsagosSzoveg(ora.cim);
+            document.getElementById("oraTargy").innerText = biztonsagosSzoveg(ora.targy);
+            document.getElementById("oraTanar").innerText = biztonsagosSzoveg(ora.tanar);
+            document.getElementById("oraTerem").innerText = biztonsagosSzoveg(ora.terem);
+
+            const modal = document.getElementById("oraModal");
+            modal.style.display = "flex";
+            modal.setAttribute("aria-hidden", "false");
             });
+        } else {
+            cella.innerHTML = "";
+            cella.classList.remove("orarend-ora");
+        }
         });
+    });
+
+    const oraModal = document.getElementById("oraModal");
+    const oraClose = document.getElementById("oraClose");
+
+    oraClose.addEventListener("click", () => {
+        oraModal.style.display = "none";
+        oraModal.setAttribute("aria-hidden", "true");
+    });
+
+    window.addEventListener("click", (e) => {
+        if (e.target === oraModal) {
+        oraModal.style.display = "none";
+        oraModal.setAttribute("aria-hidden", "true");
+        }
+    });
     }
 
     // === JEGYEK OLDAL ===
@@ -141,18 +175,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // === ÜZENETEK OLDAL ===
 if (window.location.pathname.endsWith("uzenetek.html")) {
     const felhasznalo = getFelhasznalo();
-    if (!felhasznalo) return; // 🔒 Ellenőrzés azonnal!
+    if (!felhasznalo) return;
 
     const modal = document.getElementById("uzenetModal");
     const openBtn = document.getElementById("openMessageBtn");
-    // Kizárólag a KÜLDÉS modal bezáró gombja
     const closeBtnSend = modal.querySelector(".close");
     const form = document.getElementById("uzenetForm");
     const tabla = document.querySelector(".uzenet-lista table");
     const vezerelemek = document.querySelector(".uzenet-vezerelemek");
     const select = document.getElementById("uzenet-darab");
 
-    // MEGTEKINTÉS modal (statikus a HTML-ben)
     const megtekintModal = document.getElementById("megtekintModal");
     const megtekintClose = document.getElementById("megtekintClose");
     const megtekintFelado = document.getElementById("megtekintFelado");
@@ -166,13 +198,11 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
         return;
     }
 
-    // ALAPHELYZET: legyenek elrejtve
     modal.hidden = true;
     modal.setAttribute("aria-hidden", "true");
     megtekintModal.style.display = "none";
     megtekintModal.setAttribute("aria-hidden", "true");
 
-    // === KÜLDÉS modal megnyitás / zárás ===
     openBtn.addEventListener("click", () => {
         modal.hidden = false;
         modal.setAttribute("aria-hidden", "false");
@@ -183,7 +213,7 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
         modal.setAttribute("aria-hidden", "true");
     });
 
-    // háttérre kattintás csak a megfelelõ modalra
+
     window.addEventListener("click", (e) => {
         if (e.target === modal) {
             modal.hidden = true;
@@ -195,18 +225,18 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
         }
     });
 
-            // === MEGTEKINTÉS MODAL TESZT ===
 
-        if (megtekintClose && megtekintModal) {
-        megtekintClose.addEventListener("click", () => {
-            console.log("❌ bezár gomb működik");
-            megtekintModal.style.display = "none";
-            megtekintModal.setAttribute("aria-hidden", "true");
-        });
+
+    if (megtekintClose && megtekintModal) {
+    megtekintClose.addEventListener("click", () => {
+        console.log("❌ bezár gomb működik");
+        megtekintModal.style.display = "none";
+        megtekintModal.setAttribute("aria-hidden", "true");
+    });
 }
 
 
-    // === Küldés űrlap ===
+    
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -240,7 +270,6 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
         renderUzenetek();
     });
 
-    // === renderUzenetek (sor kattintás megnyitja a megtekintő modalt) ===
     function renderUzenetek() {
         const hash = window.location.hash || "#beerkezett";
         const meret = parseInt(select.value) || 20;
@@ -273,9 +302,7 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
                     <td>${biztonsagosSzoveg(u.datum)}</td>
                 `;
 
-                // kattintás esemény: megnyitja a részleteket
                 sor.addEventListener("click", () => {
-                    // védelem: ha nincs uzenet mező, ne nyisson semmit
                     if (!u || typeof u !== "object") return;
 
                     megtekintFelado.innerText = biztonsagosSzoveg(u.felado || "");
@@ -292,7 +319,6 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
             });
         }
 
-        // lapozó kezelése (megtartva az eredetit)
         vezerelemek.querySelector(".lapozo")?.remove();
         if (osszesOldal > 1) {
             let lapozasHTML = `<div class="lapozo">`;

@@ -45,33 +45,29 @@
                 <h2>Új üzenet küldése</h2>
                 <form id="uzenetForm">
                     <label for="cimzett">Címzett:</label>
-                    <input type="text" id="cimzett" name="cimzett" placeholder="pl. tanar@iskola.hu" required>
+                    <input type="text" id="cimzett" name="cimzett" required>
 
                     <label for="targy">Tárgy:</label>
-                    <input type="text" id="targy" name="targy" placeholder="Tárgy" required>
+                    <input type="text" id="targy" name="targy" required>
 
                     <label for="uzenet">Üzenet:</label>
-                    <textarea id="uzenet" name="uzenet" rows="5" placeholder="Írd ide az üzeneted..." required></textarea>
-
+                    <textarea id="uzenet" name="uzenet" rows="5" required></textarea>
                     <button type="submit">Küldés</button>
                 </form>
             </div>
         </div>
-        <!-- Üzenet megtekintése modal -->
-<div id="megtekintModal" class="modal" hidden aria-hidden="true">
-    <div class="modal-tartalom">
-        <span id="megtekintClose" class="close">&times;</span>
-        <h2 style="text-align:center;color:blue;">Üzenet részletei</h2>
-        <p><span class="data">Feladó:</span> <span id="megtekintFelado"></span></p>
-        <p><span class="data">Címzett:</span> <span id="megtekintCimzett"></span></p>
-        <p><span class="data">Tárgy:</span> <span id="megtekintTargy"></span></p>
-        <p><span class="data">Dátum:</span> <span id="megtekintDatum"></span></p>
-        <p><span class="data">Üzenet:</span></p>
-        <p id="megtekintUzenet" style="white-space: pre-wrap;"></p>
-    </div>
-</div>
-
-
+        <div id="megtekintModal" class="modal" hidden aria-hidden="true">
+            <div class="modal-tartalom">
+                <span id="megtekintClose" class="close">&times;</span>
+                <h2 style="text-align:center;color:blue;">Üzenet részletei</h2>
+                <p><span class="data">Feladó:</span> <span id="megtekintFelado"></span></p>
+                <p><span class="data">Címzett:</span> <span id="megtekintCimzett"></span></p>
+                <p><span class="data">Tárgy:</span> <span id="megtekintTargy"></span></p>
+                <p><span class="data">Dátum:</span> <span id="megtekintDatum"></span></p>
+                <p><span class="data">Üzenet:</span></p>
+                <p id="megtekintUzenet" style="white-space: pre-wrap;"></p>
+            </div>
+        </div>
         <footer class="footer-text">
             © 2025 TanEdu | Hallgatói rendszer
         </footer>
