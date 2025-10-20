@@ -100,6 +100,39 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.location.pathname.endsWith("orarend.html")) {
         const felhasznalo = getFelhasznalo();
         if (!felhasznalo) return;
+    
+    const fejlecCella = document.querySelectorAll(".tablazat thead th");
+    const napokNevek = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"];
+
+    const ma = new Date();
+    const napIndex = (ma.getDay() + 6) % 7; // hétfő = 0
+    const hetfo = new Date(ma);
+    hetfo.setDate(ma.getDate() - napIndex);
+
+    if (napIndex >= 0 && napIndex <= 4) {
+        const childIndex = napIndex + 2; // 0 -> 2 (Hétfő), 1 -> 3 (Kedd)
+
+        document.querySelectorAll(`.tablazat thead tr th:nth-child(${childIndex})`)
+            .forEach(th => th.classList.add("aktualis-nap-fejlec"));
+
+        document.querySelectorAll(`.tablazat tbody tr td:nth-child(${childIndex})`)
+            .forEach(td => td.classList.add("aktualis-nap"));
+}
+
+    // Magyar dátumformázó
+    const formatter = new Intl.DateTimeFormat("hu-HU", { month: "long", day: "numeric" });
+
+    fejlecCella.forEach((th, i) => {
+        if (i > 0 && i <= 5) {
+            const napDatum = new Date(hetfo);
+            napDatum.setDate(hetfo.getDate() + (i - 1));
+            let datumSzoveg = formatter.format(napDatum);
+
+            datumSzoveg = datumSzoveg.charAt(0).toUpperCase() + datumSzoveg.slice(1);
+
+            th.innerHTML = `${napokNevek[i - 1]}<br><small>${datumSzoveg}</small>`;
+        }
+    });
 
     const orarend = felhasznalo.orarend || {};
     const napok = ["hetfo", "kedd", "szerda", "csutortok", "pentek"];

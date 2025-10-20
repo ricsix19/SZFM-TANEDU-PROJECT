@@ -413,8 +413,8 @@ button:hover {
     color: white;
 }
 
-#kuldes:hover { background-color: #0000cc; }
-#megse:hover { background-color: #555; }
+#kuldes:hover { background-color: blue; }
+#megse:hover { background-color: gray }
 
 .lapozo {
     display: flex;
@@ -474,7 +474,7 @@ button:hover {
     border-radius: 12px;
     width: 380px;
     display: flex;
-    color: #000;
+    color: black;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -485,7 +485,7 @@ button:hover {
     transform: translate(-50%, -50%);
 }
 
-#megtekintModal .data {
+#megtekintModal .data, #oraModal .data {
     color: blue;
     font-weight: bold;
 }
@@ -516,8 +516,30 @@ button:hover {
     color: red;
 }
 
+#oraModal .modal-tartalom {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    width: 380px;
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #oraModal, #megtekintModal, #uzenetModal {
     background-color: rgba(0, 0, 0, 0.75);
+}
+
+#megtekintModal .data, #oraModal .data {
+    color: blue;
+    font-weight: bold;
 }
 
 .orarend-ora {
@@ -526,6 +548,20 @@ button:hover {
   color: blue;
 }
 
+
+.aktualis-nap {
+    background-color: rgb(135, 198, 219) !important;
+    color: blue !important;
+    font-style: italic;
+}
+
+.aktualis-nap-fejlec{
+    background-color: rgb(0, 0, 100) !important;
+}
+
+.aktualis-nap:hover{
+    color: rgb(0, 0, 255, 0.5) !important;
+}
 
 
 @media (max-width: 480px) {
