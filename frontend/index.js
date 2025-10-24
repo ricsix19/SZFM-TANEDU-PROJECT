@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("oraTerem").innerText = biztonsagosSzoveg(ora.terem);
 
             const modal = document.getElementById("oraModal");
+            modal.hidden = false;           
             modal.style.display = "flex";
             modal.setAttribute("aria-hidden", "false");
             });
@@ -212,7 +213,7 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
 
     const modal = document.getElementById("uzenetModal");
     const openBtn = document.getElementById("openMessageBtn");
-    const closeBtnSend = modal.querySelector(".close");
+    const closeBtnSend = document.getElementById("Uzenetclose");
     const form = document.getElementById("uzenetForm");
     const tabla = document.querySelector(".uzenet-lista table");
     const vezerelemek = document.querySelector(".uzenet-vezerelemek");
@@ -379,7 +380,6 @@ if (window.location.pathname.endsWith("uzenetek.html")) {
     window.addEventListener("hashchange", renderUzenetek);
     renderUzenetek();
 }
-
 
     // === KIJELENTKEZÉS GOMB ===
     const kijelentkezesBtn = document.getElementById("kijelentkezesBtn");
