@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 localStorage.setItem("bejelentkezettFelhasznalo", JSON.stringify(felhasznalo));
                 window.location.href = "homepage.html";
-                /*const response = await fetch("https://localhost:8080/api/login", {
+                /*const response = await fetch("https://localhost:8080/api/auth/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ username, password })
