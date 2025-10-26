@@ -56,5 +56,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-/frontend/dummy.js
