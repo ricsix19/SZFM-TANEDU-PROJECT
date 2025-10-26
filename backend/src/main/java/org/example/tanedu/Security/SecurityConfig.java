@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/api/auth/login").permitAll()
-//                                .requestMatchers("/api/auth/register").hasAuthority("SYSADMIN")
+                                .requestMatchers("/api/auth/register").hasAuthority("SYSADMIN")
 //                                .requestMatchers("/api/auth/logout").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
 //                                .requestMatchers("/api/auth/change-password").hasAnyAuthority("STUDENT","TEACHER","SYSADMIN","CLASSLEADER")
 //
@@ -74,7 +74,7 @@ public class SecurityConfig {
         config.addAllowedMethod("*");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("**", config);
+        source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
 }

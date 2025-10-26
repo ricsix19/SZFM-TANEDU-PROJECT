@@ -2,7 +2,10 @@ package org.example.tanedu.Service;
 
 import org.example.tanedu.DTO.CourseDTO;
 import org.example.tanedu.Model.Course;
+import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.CourseRepository;
+import org.example.tanedu.Repository.UserRepository;
+import org.example.tanedu.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,10 @@ public class CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private Utils utils;
 
     public Course createCourse(Course course){
         return courseRepository.save(course);
@@ -22,8 +29,10 @@ public class CourseService {
         return courseRepository.findAll().stream().map(CourseDTO::new).toList();
     }
 
-    public List<CourseDTO> getCourseByDepartmentName(String name){
-        return courseRepository.findAllByDepartment_Name(name).stream().map(CourseDTO::new).toList();
+    public List<CourseDTO> getCourseByDepartmentName(){
+        User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
+
+        return courseRepository.findAllByDepartment_Name(foundUser.getDepartment().getName()).stream().map(CourseDTO::new).toList();
     }
 
     public CourseDTO getCourseById(Long id){

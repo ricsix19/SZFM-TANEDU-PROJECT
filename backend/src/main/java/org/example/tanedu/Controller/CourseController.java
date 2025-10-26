@@ -23,8 +23,8 @@ public class CourseController {
         return courseService.getCourseById(id);
     }
     @GetMapping("/getCourseByDepartmentName")
-    public List<CourseDTO> getCourseByDepartmentName(@RequestParam String name){
-        return courseService.getCourseByDepartmentName(name);
+    public List<CourseDTO> getCourseByDepartmentName(){
+        return courseService.getCourseByDepartmentName();
     }
 
     @PutMapping("/updateName/{id}")
