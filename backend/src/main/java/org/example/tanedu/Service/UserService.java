@@ -6,14 +6,12 @@ import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.UserRepository;
 import org.example.tanedu.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -31,6 +29,11 @@ public class UserService {
     public Role getCurrentUserRole(){
         User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
         return foundUser.getRole();
+    }
+
+    public List<String> getAllTeacherEmails(){
+        List<User> foundTeachers = userRepository.findAllByRole(Role.TEACHER);
+        return foundTeachers.stream().map(User::getEmail).collect(Collectors.toList());
     }
 
     public UserDTO getCurrentUser(){
