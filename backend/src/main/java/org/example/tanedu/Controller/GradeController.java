@@ -25,4 +25,9 @@ public class GradeController {
     public List<GradeDTO> getAllGradesByStudentId(@PathVariable Long id){
         return gradeService.getAllGradesByStudentId(id);
     }
+
+    @GetMapping("/getAllByCurrentUser")
+    public List<GradeDTO> getAllGradesByCurrentUser(){
+        return gradeService.getAllGradesByCurrentUser();
+    }
 }

@@ -2,8 +2,10 @@ package org.example.tanedu.Service;
 
 import org.example.tanedu.DTO.CourseDTO;
 import org.example.tanedu.Model.Course;
+import org.example.tanedu.Model.Department;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.CourseRepository;
+import org.example.tanedu.Repository.DepartmentRepository;
 import org.example.tanedu.Repository.UserRepository;
 import org.example.tanedu.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,42 @@ public class CourseService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private DepartmentRepository departmentRepository;
+    @Autowired
     private Utils utils;
 
-    public Course createCourse(Course course){
-        return courseRepository.save(course);
+    public CourseDTO createCourse(Course course) {
+        Course courseToAdd = new Course();
+        courseToAdd.setName(course.getName());
+        courseToAdd.setDay(course.getDay());
+        courseToAdd.setDuration(course.getDuration());
+
+        if (course.getTeacher() != null && course.getTeacher().getId() != null) {
+            User teacher = userRepository.findById(course.getTeacher().getId())
+                    .orElseThrow(() -> new RuntimeException("Teacher not found!"));
+            if ("STUDENT".equals(teacher.getRole().name())) {
+                throw new RuntimeException("You can't set student as teacher");
+            }
+            courseToAdd.setTeacher(teacher);
+        } else if (course.getTeacher() != null && course.getTeacher().getFirstName() != null) {
+            User teacher = userRepository.findByFirstNameContainingIgnoreCase(course.getTeacher().getFirstName());
+            if (teacher == null) throw new RuntimeException("Teacher not found");
+            if ("STUDENT".equals(teacher.getRole().name())) throw new RuntimeException("You can't set student as teacher");
+            courseToAdd.setTeacher(teacher);
+        }
+
+            if (course.getDepartment() != null && course.getDepartment().getName() != null) {
+                Department department = departmentRepository.findByName(course.getDepartment().getName());
+                if (department == null) {
+                    Department newDept = new Department();
+                    newDept.setName(course.getDepartment().getName());
+                    department = departmentRepository.save(newDept);
+                }
+                courseToAdd.setDepartment(department);
+            }
+
+            Course saved = courseRepository.save(courseToAdd);
+            return new CourseDTO(saved);
     }
 
     public List<CourseDTO> getAllCourse(){

@@ -43,7 +43,7 @@ public class CourseController {
     }
 
     @PostMapping("/create")
-    public Course createCourse(@RequestBody Course course){
+    public CourseDTO createCourse(@RequestBody Course course){
         return courseService.createCourse(course);
     }
 

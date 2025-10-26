@@ -1,6 +1,7 @@
 package org.example.tanedu.Controller;
 
 import org.example.tanedu.DTO.UserDTO;
+import org.example.tanedu.Model.Role;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class UserController {
     @GetMapping("/getCurrentUser")
     public UserDTO getCurrentUser(){
         return userService.getCurrentUser();
+    }
+    @GetMapping("/getCurrentUserRole")
+    public Role getCurrentUserRole(){
+        return userService.getCurrentUserRole();
     }
 
     @GetMapping("/getById/{id}")

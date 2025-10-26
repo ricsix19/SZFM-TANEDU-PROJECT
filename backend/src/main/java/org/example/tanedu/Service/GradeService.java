@@ -41,4 +41,9 @@ public class GradeService {
         User foundUser = userRepository.findById(id).orElseThrow(()->new RuntimeException("No user found with id: "+id));
         return gradeRepository.findGradesByStudent(foundUser).stream().map(GradeDTO::new).toList();
     }
+
+    public List<GradeDTO> getAllGradesByCurrentUser(){
+        User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
+        return gradeRepository.findGradesByStudent(foundUser).stream().map(GradeDTO::new).toList();
+    }
 }
