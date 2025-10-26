@@ -1,5 +1,6 @@
 package org.example.tanedu.Controller;
 
+import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class UserController {
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/getCurrentUser")
+    public UserDTO getCurrentUser(){
+        return userService.getCurrentUser();
     }
 
     @GetMapping("/getById/{id}")

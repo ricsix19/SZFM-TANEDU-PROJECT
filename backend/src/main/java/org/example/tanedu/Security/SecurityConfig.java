@@ -69,7 +69,7 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://127.0.0.1:5500"); // Live Server URL-je
+        config.addAllowedOrigin("http://localhost:5173"); // Live Server URL-je
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

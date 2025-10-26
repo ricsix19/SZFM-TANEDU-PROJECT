@@ -15,17 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+           
+            
             try {
-                const felhasznalo = window.dummyFelhasznalok?.find(u => u.username === username && u.password === password);
-                if (!felhasznalo) throw new Error("Hibás felhasználónév vagy jelszó!");
+                // const felhasznalo = window.dummyFelhasznalok?.find(u => u.username === username && u.password === password);
+                 // if (!felhasznalo) throw new Error("Hibás felhasználónév vagy jelszó!");
 
-                localStorage.setItem("bejelentkezettFelhasznalo", JSON.stringify(felhasznalo));
+                console.log(username);
+                console.log(password);
+
+                localStorage.setItem("bejelentkezettFelhasznalo", JSON.stringify(username));
                 window.location.href = "homepage.html";
-                /*const response = await fetch("https://localhost:8080/api/login", {
+                const response = await fetch("http://localhost:8080/api/auth/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ username, password })
                 });
+                console.log(response);
+                
 
                 if (!response.ok) {
                     const text = await response.text();
@@ -38,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 localStorage.setItem("bejelentkezettFelhasznalo", JSON.stringify(felhasznalo));
-                window.location.href = "homepage.html";*/
+                window.location.href = "homepage.html";
             } catch (error) {
                 console.error("Bejelentkezési hiba:", error);
                 errorMsg.textContent = error.message || "Hiba történt a bejelentkezés során.";

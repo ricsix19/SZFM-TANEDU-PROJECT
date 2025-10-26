@@ -1,5 +1,6 @@
 package org.example.tanedu.Service;
 
+import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.UserRepository;
 import org.example.tanedu.Utils;
@@ -24,9 +25,10 @@ public class UserService {
 
     public List<User> getAllUsers(){
         if (utils.isCurrentUser("SYSADMIN")) return userRepository.findAll();
-
-
         return Collections.emptyList();
+    }
+    public UserDTO getCurrentUser(){
+        return new UserDTO(userRepository.findByEmail(utils.getCurrentUserEmail()));
     }
 
     public User getUserById(Long id){
