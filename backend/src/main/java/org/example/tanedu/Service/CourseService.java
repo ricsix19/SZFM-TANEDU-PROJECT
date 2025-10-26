@@ -21,6 +21,11 @@ public class CourseService {
     public List<CourseDTO> getAllCourse(){
         return courseRepository.findAll().stream().map(CourseDTO::new).toList();
     }
+
+    public List<CourseDTO> getCourseByDepartmentName(String name){
+        return courseRepository.findAllByDepartment_Name(name).stream().map(CourseDTO::new).toList();
+    }
+
     public CourseDTO getCourseById(Long id){
         Course foundCourse = courseRepository.findById(id).orElseThrow(()->new RuntimeException("No course found with id: "+id));
         return new CourseDTO(foundCourse);

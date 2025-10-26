@@ -22,6 +22,10 @@ public class CourseController {
     public CourseDTO getCourseById(@PathVariable Long id){
         return courseService.getCourseById(id);
     }
+    @GetMapping("/getCourseByDepartmentName")
+    public List<CourseDTO> getCourseByDepartmentName(@RequestParam String name){
+        return courseService.getCourseByDepartmentName(name);
+    }
 
     @PutMapping("/updateName/{id}")
     public Course updateCourseNameById(@PathVariable Long id, @RequestBody String name){
