@@ -59,4 +59,20 @@ public class JwtUtil {
         }
         return false;
     }
+
+    public boolean isTokenExpired(String token) {
+        try {
+            Claims claims = Jwts
+                    .parser()
+                    .verifyWith(key).build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+            Date expiration = claims.getExpiration();
+            return expiration != null && expiration.before(new Date());
+        } catch (ExpiredJwtException e) {
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
+    }
 }

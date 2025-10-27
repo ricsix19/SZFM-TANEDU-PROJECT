@@ -94,6 +94,25 @@ public class AuthController {
         response.put("message", "User registered successfully");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @GetMapping("/check-token")
+    public ResponseEntity<?> checkToken(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        Map<String, Object> response = new HashMap<>();
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.put("error", "Missing or malformed Authorization header");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        String token = authHeader.substring(7);
+        boolean valid = jwtUtils.validateJwtToken(token);
+        boolean expired = jwtUtils.isTokenExpired(token);
+
+        response.put("valid", valid);
+        response.put("expired", expired);
+        return ResponseEntity.ok(response);
+    }
+
+
     @PostMapping("/logout")
     public ResponseEntity<?> logOut() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
