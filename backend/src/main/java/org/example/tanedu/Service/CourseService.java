@@ -41,32 +41,51 @@ public class CourseService {
         } else if (course.getTeacher() != null && course.getTeacher().getFirstName() != null) {
             User teacher = userRepository.findByFirstNameContainingIgnoreCase(course.getTeacher().getFirstName());
             if (teacher == null) throw new RuntimeException("Teacher not found");
-            if ("STUDENT".equals(teacher.getRole().name())) throw new RuntimeException("You can't set student as teacher");
+            if ("STUDENT".equals(teacher.getRole().name()))
+                throw new RuntimeException("You can't set student as teacher");
+            courseToAdd.setTeacher(teacher);
+        } else if (course.getTeacher() != null && course.getTeacher().getEmail() != null) {
+            User teacher = userRepository.findByEmail(course.getTeacher().getEmail());
+            if (teacher == null) throw new RuntimeException("Teacher not found");
+            if ("STUDENT".equals(teacher.getRole().name()))
+                throw new RuntimeException("You can't set student as teacher");
             courseToAdd.setTeacher(teacher);
         }
 
-            if (course.getDepartment() != null && course.getDepartment().getName() != null) {
-                Department department = departmentRepository.findByName(course.getDepartment().getName());
-                if (department == null) {
-                    Department newDept = new Department();
-                    newDept.setName(course.getDepartment().getName());
-                    department = departmentRepository.save(newDept);
-                }
-                courseToAdd.setDepartment(department);
+        if (course.getDepartment() != null && course.getDepartment().getName() != null) {
+            Department department = departmentRepository.findByName(course.getDepartment().getName());
+            if (department == null) {
+                Department newDept = new Department();
+                newDept.setName(course.getDepartment().getName());
+                department = departmentRepository.save(newDept);
             }
+            courseToAdd.setDepartment(department);
 
-            Course saved = courseRepository.save(courseToAdd);
-            return new CourseDTO(saved);
+            List<Course> sameDayCourses = courseRepository.findAllByDepartment_NameAndDay(department.getName(), courseToAdd.getDay());
+            for (Course existing : sameDayCourses) {
+                if (utils.isOverlapping(existing.getDuration(), courseToAdd.getDuration())) {
+                    throw new RuntimeException("Department already has a course at this time");
+                }
+            }
+        }
+
+        Course saved = courseRepository.save(courseToAdd);
+        return new CourseDTO(saved);
     }
 
     public List<CourseDTO> getAllCourse(){
         return courseRepository.findAll().stream().map(CourseDTO::new).toList();
     }
 
-    public List<CourseDTO> getCourseByDepartmentName(){
+    public List<CourseDTO> getCourseByDepartmentNameForCurrentUser(){
         User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
 
         return courseRepository.findAllByDepartment_Name(foundUser.getDepartment().getName()).stream().map(CourseDTO::new).toList();
+    }
+
+    public List<CourseDTO> getCoursesByDepartmentName(String name){
+        List<Course> foundCourses =  courseRepository.findAllByDepartment_Name(name);
+        return foundCourses.stream().map(CourseDTO::new).toList();
     }
 
     public CourseDTO getCourseById(Long id){
