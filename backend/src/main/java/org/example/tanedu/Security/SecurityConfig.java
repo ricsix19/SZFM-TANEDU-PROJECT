@@ -44,7 +44,6 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.disable())
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
@@ -69,7 +68,7 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:5173"); // Live Server URL-je
+        config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
