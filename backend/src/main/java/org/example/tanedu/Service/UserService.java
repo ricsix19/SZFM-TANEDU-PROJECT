@@ -35,6 +35,10 @@ public class UserService {
         List<User> foundTeachers = userRepository.findAllByRole(Role.TEACHER);
         return foundTeachers.stream().map(User::getEmail).collect(Collectors.toList());
     }
+    public List<String> getAllStudentsEmail(){
+        List<User> foundTeachers = userRepository.findAllByRole(Role.STUDENT);
+        return foundTeachers.stream().map(User::getEmail).collect(Collectors.toList());
+    }
 
     public UserDTO getCurrentUser(){
         return new UserDTO(userRepository.findByEmail(utils.getCurrentUserEmail()));

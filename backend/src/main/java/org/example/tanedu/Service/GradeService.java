@@ -23,8 +23,9 @@ public class GradeService {
 
     public GradeDTO createGrade(Grade grade){
         Grade gradeToAdd = new Grade();
+        User foundStudent = userRepository.findByEmail(grade.getStudent().getEmail());
         gradeToAdd.setComment(grade.getComment());
-        gradeToAdd.setStudent(grade.getStudent());
+        gradeToAdd.setStudent(foundStudent);
         if (grade.getTeacher() == null) {
             User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
             gradeToAdd.setTeacher(foundUser);

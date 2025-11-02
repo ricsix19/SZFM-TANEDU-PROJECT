@@ -25,6 +25,10 @@ public class UserController {
     public List<String> getAllTeacherEmails(){
         return userService.getAllTeacherEmails();
     }
+    @GetMapping("/getAllStudentsEmail")
+    public List<String> getAllStudentsEmail(){
+        return userService.getAllStudentsEmail();
+    }
 
     @GetMapping("/getCurrentUser")
     public UserDTO getCurrentUser(){
