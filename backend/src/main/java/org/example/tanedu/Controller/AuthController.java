@@ -81,6 +81,9 @@ public class AuthController {
             error.put("error", "Bad role provided please chose from these: TEACHER, STUDENT, SYSADMIN, CLASSLEADER");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
+        if (user.getRole().equals( Role.TEACHER )){
+            newUser.setSubject(user.getSubject());
+        }
         newUser.setRole(user.getRole());
         if (user.getDepartment() != null && user.getDepartment().getId() != null) {
             Department department = departmentRepository.findById(user.getDepartment().getId())

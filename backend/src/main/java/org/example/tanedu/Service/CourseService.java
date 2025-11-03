@@ -88,6 +88,14 @@ public class CourseService {
         return foundCourses.stream().map(CourseDTO::new).toList();
     }
 
+    public List<CourseDTO> getCoursesByCurrentTeacher() {
+        User teacher = userRepository.findByEmail(utils.getCurrentUserEmail());
+        return courseRepository.findByTeacherId(teacher.getId())
+                .stream()
+                .map(CourseDTO::new)
+                .toList();
+    }
+
     public CourseDTO getCourseById(Long id){
         Course foundCourse = courseRepository.findById(id).orElseThrow(()->new RuntimeException("No course found with id: "+id));
         return new CourseDTO(foundCourse);

@@ -1,5 +1,6 @@
 package org.example.tanedu.Repository;
 
+import org.example.tanedu.Model.Department;
 import org.example.tanedu.Model.Role;
 import org.example.tanedu.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     User findByFirstNameContainingIgnoreCase(String firstName);
 
     List<User> findAllByRole(Role role);
+
+    List<User> findAllByDepartmentAndRole(Department department, Role role);
 }
