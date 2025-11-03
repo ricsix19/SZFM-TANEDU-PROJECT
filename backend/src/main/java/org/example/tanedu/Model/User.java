@@ -54,6 +54,10 @@ public class User {
     @JsonIgnoreProperties({"students", "courseList"})
     private Department department;
 
+    @OneToOne
+    @JoinColumn(name = "class_leader_department_id")
+    private Department classLeaderOf;
+
     public String getFullName(){
         return this.lastName +" "+ this.firstName;
     }

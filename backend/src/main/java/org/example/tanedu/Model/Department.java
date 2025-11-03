@@ -1,7 +1,4 @@
 package org.example.tanedu.Model;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,4 +25,7 @@ public class Department {
     @OneToMany(mappedBy = "department")
     // @JsonIgnoreProperties({"department", "courseList", "receivedGrades", "givenGrades", "studentMessages", "teacherMessages"})
     private List<User> students;
+
+    @OneToOne(mappedBy = "classLeaderOf")
+    private User classLeader;
 }
