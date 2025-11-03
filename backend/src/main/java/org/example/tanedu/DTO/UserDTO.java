@@ -17,6 +17,7 @@ public class UserDTO {
     private String role;
     private String departmentName;
     private String fullName;
+    private String subject;
 
     public UserDTO(User u) {
         this.id = u.getId();
@@ -27,6 +28,7 @@ public class UserDTO {
         this.role = u.getRole() != null ? u.getRole().name() : null;
         this.departmentName = u.getDepartment() != null ? u.getDepartment().getName() : null;
         this.fullName = u.getFullName();
+        this.subject = u.getSubject() != null ? u.getSubject().name() : null;
     }
 
 

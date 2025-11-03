@@ -1,7 +1,9 @@
+// language: java
 package org.example.tanedu.Service;
 
 import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.Role;
+import org.example.tanedu.Model.Subject;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.UserRepository;
 import org.example.tanedu.Utils;
@@ -59,10 +61,23 @@ public class UserService {
 
         if (!isAdmin && !isOwnProfile) throw new RuntimeException("You don't have permission to edit other users");
 
+        if (user.getSubject() != null) {
+            Role targetRole = user.getRole() != null ? user.getRole() : foundUser.getRole();
+            if (targetRole != Role.TEACHER) {
+                throw new RuntimeException("Only users with role TEACHER can have a subject");
+            }
+            foundUser.setSubject(user.getSubject());
+        }
+
+        if (user.getRole() != null) {
+            foundUser.setRole(user.getRole());
+            if (user.getRole() != Role.TEACHER) {
+                foundUser.setSubject(null);
+            }
+        }
 
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {foundUser.setPassword(encoder.encode(user.getPassword()));}
         if (user.getDepartment() != null) {foundUser.setDepartment(user.getDepartment());}
-        if (user.getRole() != null) {foundUser.setRole(user.getRole());}
         if (user.getEmail() != null) {foundUser.setEmail(user.getEmail());}
         if (user.getLastName() != null) {foundUser.setLastName(user.getLastName());}
         if (user.getFirstName() != null) {foundUser.setFirstName(user.getFirstName());}
@@ -80,6 +95,4 @@ public class UserService {
         return "Deletion failed";
 
     }
-
-
 }
