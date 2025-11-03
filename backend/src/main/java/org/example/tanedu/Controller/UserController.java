@@ -2,6 +2,7 @@ package org.example.tanedu.Controller;
 
 import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.Role;
+import org.example.tanedu.Model.Subject;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,14 @@ public class UserController {
     @GetMapping("/getAllStudentsEmail")
     public List<String> getAllStudentsEmail(){
         return userService.getAllStudentsEmail();
+    }
+    @GetMapping("/getAllSubjects")
+    public List<Subject> getAllSubjects(){
+        return userService.getAllSubjects();
+    }
+    @GetMapping("/getAllAvailableSubjects")
+    public List<String> getAllAvailableSubjects(){
+        return userService.getAllAvailableSubjects();
     }
 
     @GetMapping("/getCurrentUser")

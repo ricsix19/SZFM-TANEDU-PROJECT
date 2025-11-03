@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +42,19 @@ public class UserService {
     public List<String> getAllStudentsEmail(){
         List<User> foundTeachers = userRepository.findAllByRole(Role.STUDENT);
         return foundTeachers.stream().map(User::getEmail).collect(Collectors.toList());
+    }
+    public List<Subject> getAllSubjects(){
+        return userRepository.findAllByRole(Role.TEACHER).stream()
+                .map(User::getSubject)
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getAllAvailableSubjects(){
+        return Arrays.stream(Subject.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
     }
 
     public UserDTO getCurrentUser(){
