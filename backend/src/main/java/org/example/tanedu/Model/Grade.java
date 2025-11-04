@@ -18,7 +18,7 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer value;
-    private String comment;
+    private Subject subject;
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne

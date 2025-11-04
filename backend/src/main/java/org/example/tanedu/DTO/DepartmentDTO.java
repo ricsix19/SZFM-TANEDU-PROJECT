@@ -13,14 +13,25 @@ import java.util.List;
 public class DepartmentDTO {
     private Long id;
     private String name;
-    private List<Long> courseIds;
-    private List<Long> studentIds;
+    private List<CourseDTO> courses;
+    private List<UserDTO> students;
+    private UserDTO classLeader;
 
-    public DepartmentDTO(Department department){
-        this.id =department.getId();
-        this.name=department.getName();
-        this.courseIds=department.getCourseList().stream().map(Course::getId).toList();
-        this.studentIds=department.getStudents().stream().map(User::getId).toList();
+    public DepartmentDTO(Department department) {
+        this.id = department.getId();
+        this.name = department.getName();
+
+        this.courses = department.getCourseList() != null
+                ? department.getCourseList().stream().map(CourseDTO::new).toList()
+                : List.of();
+
+        this.students = department.getStudents() != null
+                ? department.getStudents().stream().map(UserDTO::new).toList()
+                : List.of();
+
+        this.classLeader = department.getClassLeader() != null
+                ? new UserDTO(department.getClassLeader())
+                : null;
     }
-
 }
+

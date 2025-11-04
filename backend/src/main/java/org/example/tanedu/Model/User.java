@@ -55,7 +55,7 @@ public class User {
     private Department department;
 
     @OneToOne
-    @JoinColumn(name = "class_leader_department_id")
+    @JoinColumn(name = "class_leader_of_department_id")
     private Department classLeaderOf;
 
     public String getFullName(){

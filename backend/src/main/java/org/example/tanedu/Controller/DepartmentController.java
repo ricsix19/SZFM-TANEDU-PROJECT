@@ -16,12 +16,16 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PostMapping("/create")
-    public Department createDepartment(@RequestBody Department department){
+    public DepartmentDTO createDepartment(@RequestBody Department department){
         return departmentService.createDepartment(department);
     }
     @GetMapping("/getAll")
     public List<DepartmentDTO> getAllDepartments(){
         return departmentService.getAllDepartments();
+    }
+    @GetMapping("/getDepartmentClassLeader/{name}")
+    public String getDepartmentClassLeader(@PathVariable String name){
+        return departmentService.getDepartmentClassLeader(name);
     }
 
     @GetMapping("/getById/{id}")

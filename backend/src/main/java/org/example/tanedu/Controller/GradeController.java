@@ -2,6 +2,7 @@ package org.example.tanedu.Controller;
 
 import org.example.tanedu.DTO.GradeDTO;
 import org.example.tanedu.Model.Grade;
+import org.example.tanedu.Model.Subject;
 import org.example.tanedu.Service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,11 @@ public class GradeController {
     @GetMapping("/getAllByCurrentUser")
     public List<GradeDTO> getAllGradesByCurrentUser(){
         return gradeService.getAllGradesByCurrentUser();
+    }
+
+    @GetMapping("/getAllGradesBySubject/{subject}")
+    public List<Integer> getAllGradesBySubject(@PathVariable String subject){
+        return gradeService.getAllGradesBySubject(subject);
     }
 
     @DeleteMapping("/deleteGradeById/{id}")

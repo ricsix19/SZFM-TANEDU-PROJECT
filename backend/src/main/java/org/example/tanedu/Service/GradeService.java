@@ -3,6 +3,7 @@ package org.example.tanedu.Service;
 import org.example.tanedu.DTO.GradeDTO;
 import org.example.tanedu.Model.Grade;
 import org.example.tanedu.Model.Role;
+import org.example.tanedu.Model.Subject;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.GradeRepository;
 import org.example.tanedu.Repository.UserRepository;
@@ -25,7 +26,10 @@ public class GradeService {
     public GradeDTO createGrade(Grade grade){
         Grade gradeToAdd = new Grade();
         User foundStudent = userRepository.findByEmail(grade.getStudent().getEmail());
-        gradeToAdd.setComment(grade.getComment());
+        gradeToAdd.setSubject(grade.getSubject());
+        if (foundStudent == null) {
+            throw new RuntimeException("No user found!");
+        }
         gradeToAdd.setStudent(foundStudent);
         if (grade.getTeacher() == null) {
             User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
@@ -46,6 +50,23 @@ public class GradeService {
     public List<GradeDTO> getAllGradesByStudentEmail(String email){
         User foundUser = userRepository.findByEmail(email);
         return gradeRepository.findGradesByStudent(foundUser).stream().map(GradeDTO::new).toList();
+    }
+
+    public List<Integer> getAllGradesBySubject(String subjectName){
+        if (subjectName == null || subjectName.isBlank()) {
+            throw new RuntimeException("Subject is required");
+        }
+
+        Subject subject;
+        try {
+            subject = Subject.fromString(subjectName);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid subject: " + subjectName);
+        }
+
+        User foundUser = userRepository.findByEmail(utils.getCurrentUserEmail());
+        List<Grade> grades = gradeRepository.findGradesByStudentAndSubject(foundUser, subject);
+        return grades.stream().map(grade -> grade.getValue()).toList();
     }
 
     public List<GradeDTO> getAllGradesByCurrentUser(){
