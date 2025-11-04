@@ -3,6 +3,7 @@ package org.example.tanedu.Service;
 import org.example.tanedu.DTO.CourseDTO;
 import org.example.tanedu.Model.Course;
 import org.example.tanedu.Model.Department;
+import org.example.tanedu.Model.Subject;
 import org.example.tanedu.Model.User;
 import org.example.tanedu.Repository.CourseRepository;
 import org.example.tanedu.Repository.DepartmentRepository;
@@ -50,6 +51,31 @@ public class CourseService {
             if ("STUDENT".equals(teacher.getRole().name()))
                 throw new RuntimeException("You can't set student as teacher");
             courseToAdd.setTeacher(teacher);
+        }
+
+        if (courseToAdd.getTeacher() != null && courseToAdd.getName() != null) {
+            org.example.tanedu.Model.Subject courseSubject;
+            try {
+                courseSubject = Subject.fromString(courseToAdd.getName());
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Invalid subject name: " + courseToAdd.getName());
+            }
+
+            if (courseToAdd.getTeacher().getSubject() == null ||
+                    !courseToAdd.getTeacher().getSubject().equals(courseSubject)) {
+                throw new RuntimeException("Teacher doesn't teach this subject");
+            }
+        }
+
+        if (courseToAdd.getTeacher() != null) {
+            List<Course> teacherCourses = courseRepository.findByTeacherId(courseToAdd.getTeacher().getId());
+            for (Course existing : teacherCourses) {
+                if (existing.getDay() != null && existing.getDay().equals(courseToAdd.getDay())) {
+                    if (utils.isOverlapping(existing.getDuration(), courseToAdd.getDuration())) {
+                        throw new RuntimeException("Teacher already has a course at this time");
+                    }
+                }
+            }
         }
 
         if (course.getDepartment() != null && course.getDepartment().getName() != null) {
