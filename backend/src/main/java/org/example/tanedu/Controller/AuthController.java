@@ -90,6 +90,9 @@ public class AuthController {
                     .orElseThrow(() -> new RuntimeException("Department not found with id: " + user.getDepartment().getId()));
             newUser.setDepartment(department);
         }
+        if (user.getRole().equals( Role.CLASSLEADER )){
+            newUser.setClassLeaderOf(user.getClassLeaderOf());
+        }
 
         userRepository.save(newUser);
 
