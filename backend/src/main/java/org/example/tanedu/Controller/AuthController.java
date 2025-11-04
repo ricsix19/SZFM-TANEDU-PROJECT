@@ -93,6 +93,9 @@ public class AuthController {
         if (user.getRole().equals( Role.CLASSLEADER )){
             newUser.setClassLeaderOf(user.getClassLeaderOf());
         }
+        if (user.getBirthDate() != null){
+            newUser.setBirthDate(user.getBirthDate());
+        }
 
         userRepository.save(newUser);
 
