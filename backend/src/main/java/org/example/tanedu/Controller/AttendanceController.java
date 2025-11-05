@@ -53,10 +53,12 @@ public class AttendanceController {
 
     @GetMapping("/{courseId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'STUDENT')")
-    public ResponseEntity<?> getAttendance(@PathVariable Long courseId, @RequestParam String date) {
+    public ResponseEntity<?> getAttendance(@PathVariable Long courseId,
+                                           @RequestParam String date,
+                                           @RequestParam(required = false) String timeSlot) {
         try {
             LocalDate localDate = LocalDate.parse(date);
-            List<Attendance> attendances = attendanceService.getAttendanceByCourseAndDate(courseId, localDate);
+            List<Attendance> attendances = attendanceService.getAttendanceByCourseAndDate(courseId, localDate, timeSlot);
 
             List<AttendanceResponseDTO> dtoList = attendances.stream()
                     .map(a -> new AttendanceResponseDTO(
@@ -66,7 +68,8 @@ public class AttendanceController {
                             a.getStudent() != null ? a.getStudent().getId() : null,
                             a.getStudent() != null ? a.getStudent().getFullName() : null,
                             a.getCourse() != null ? a.getCourse().getId() : null,
-                            a.getCourse() != null ? a.getCourse().getName() : null
+                            a.getCourse() != null ? a.getCourse().getName() : null,
+                            a.getTimeSlot()
                     ))
                     .collect(Collectors.toList());
 

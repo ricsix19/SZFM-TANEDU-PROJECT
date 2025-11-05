@@ -52,6 +52,8 @@ public class AttendanceService {
             attendance.setCourse(course);
             attendance.setDate(request.getDate());
             attendance.setPresent(sp.getPresent());
+            // persist the chosen timeslot (can be null)
+            attendance.setTimeSlot(request.getTimeSlot());
 
             attendanceRepository.save(attendance);
         }
@@ -68,14 +70,15 @@ public class AttendanceService {
 
             List<Attendance> attendances = attendanceRepository.findByStudentId(currentUser.getId());
 
-            // Filter only absences (present = false) and map to a response DTO
             List<Map<String, Object>> absences = attendances.stream()
                     .filter(attendance -> !attendance.getPresent())
                     .map(attendance -> {
                         Map<String, Object> absenceInfo = new HashMap<>();
                         absenceInfo.put("id", attendance.getId());
                         absenceInfo.put("date", attendance.getDate());
+                        absenceInfo.put("timeSlot", attendance.getTimeSlot());
                         absenceInfo.put("courseName", attendance.getCourse().getName());
+                        absenceInfo.put("isPresent", attendance.getPresent());
                         absenceInfo.put("courseId", attendance.getCourse().getId());
                         return absenceInfo;
                     })
@@ -88,9 +91,12 @@ public class AttendanceService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
     }
-
-    public List<Attendance> getAttendanceByCourseAndDate(Long courseId, LocalDate date) {
-        return attendanceRepository.findByCourseIdAndDate(courseId, date);
+    public List<Attendance> getAttendanceByCourseAndDate(Long courseId, LocalDate date, String timeSlot) {
+        if (timeSlot == null || timeSlot.isBlank()) {
+            return attendanceRepository.findByCourseIdAndDate(courseId, date);
+        } else {
+            return attendanceRepository.findByCourseIdAndDateAndTimeSlot(courseId, date, timeSlot);
+        }
     }
 
     public ResponseEntity<?> deleteAttendance(Long attendanceId) {

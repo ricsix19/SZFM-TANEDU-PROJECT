@@ -19,4 +19,5 @@ public class AttendanceResponseDTO {
     private String studentName;
     private Long courseId;
     private String courseName;
+    private String timeSlot;
 }

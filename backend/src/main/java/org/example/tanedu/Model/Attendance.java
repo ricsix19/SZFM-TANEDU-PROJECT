@@ -28,4 +28,7 @@ public class Attendance {
 
     @Column(name = "is_present", nullable = false)
     private Boolean present;
+
+    @Column(name = "time_slot")
+    private String timeSlot;
 }
