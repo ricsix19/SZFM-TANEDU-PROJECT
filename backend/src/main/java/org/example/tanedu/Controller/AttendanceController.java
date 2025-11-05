@@ -1,15 +1,10 @@
 package org.example.tanedu.Controller;
 
 import org.example.tanedu.DTO.AttendanceRequestDTO;
-import org.example.tanedu.DTO.CourseDTO;
+import org.example.tanedu.DTO.AttendanceResponseDTO;
 import org.example.tanedu.Model.Attendance;
-import org.example.tanedu.Model.Course;
-import org.example.tanedu.Model.Role;
-import org.example.tanedu.Model.User;
-import org.example.tanedu.Repository.CourseRepository;
-import org.example.tanedu.Repository.UserRepository;
+
 import org.example.tanedu.Service.AttendanceService;
-import org.example.tanedu.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +15,14 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/attendance")
 public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CourseRepository courseRepository;
-    @Autowired
-    private Utils utils;
+
 
     @PostMapping
     @PreAuthorize("hasRole('TEACHER')")
@@ -48,15 +39,38 @@ public class AttendanceController {
         }
     }
 
+    @GetMapping("/my-attendances")
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<?> getMyAttendances() {
+        return attendanceService.getMyAttendances();
+    }
+
+    @DeleteMapping("/{attendanceId}")
+    @PreAuthorize("hasAnyRole('TEACHER', 'SYSADMIN')")
+    public ResponseEntity<?> deleteAttendance(@PathVariable Long attendanceId) {
+        return attendanceService.deleteAttendance(attendanceId);
+    }
+
     @GetMapping("/{courseId}")
     @PreAuthorize("hasAnyRole('TEACHER', 'STUDENT')")
-    public ResponseEntity<?> getAttendance(
-            @PathVariable Long courseId,
-            @RequestParam String date) {
+    public ResponseEntity<?> getAttendance(@PathVariable Long courseId, @RequestParam String date) {
         try {
             LocalDate localDate = LocalDate.parse(date);
             List<Attendance> attendances = attendanceService.getAttendanceByCourseAndDate(courseId, localDate);
-            return ResponseEntity.ok(attendances);
+
+            List<AttendanceResponseDTO> dtoList = attendances.stream()
+                    .map(a -> new AttendanceResponseDTO(
+                            a.getId(),
+                            a.getDate(),
+                            a.getPresent(),
+                            a.getStudent() != null ? a.getStudent().getId() : null,
+                            a.getStudent() != null ? a.getStudent().getFullName() : null,
+                            a.getCourse() != null ? a.getCourse().getId() : null,
+                            a.getCourse() != null ? a.getCourse().getName() : null
+                    ))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(dtoList);
         } catch (Exception e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", e.getMessage());
