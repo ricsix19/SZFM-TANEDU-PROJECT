@@ -2,9 +2,11 @@
 package org.example.tanedu.Service;
 
 import org.example.tanedu.DTO.UserDTO;
+import org.example.tanedu.Model.Department;
 import org.example.tanedu.Model.Role;
 import org.example.tanedu.Model.Subject;
 import org.example.tanedu.Model.User;
+import org.example.tanedu.Repository.DepartmentRepository;
 import org.example.tanedu.Repository.UserRepository;
 import org.example.tanedu.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
     @Autowired
     private PasswordEncoder encoder;
     @Autowired
@@ -65,6 +69,11 @@ public class UserService {
         if (utils.isCurrentUser("SYSADMIN")) return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: "+id));
 
         return userRepository.findByEmail(utils.getCurrentUserEmail());
+    }
+
+    public List<UserDTO> getAllStudentsByDepartment(String department){
+        Department foundDepartment = departmentRepository.findByName(department);
+        return userRepository.findAllByDepartment(foundDepartment).stream().map(UserDTO::new).toList();
     }
 
     public User updateUserById(Long id, User user) {

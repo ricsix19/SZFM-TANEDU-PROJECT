@@ -38,6 +38,10 @@ public class UserController {
     public List<String> getAllAvailableSubjects(){
         return userService.getAllAvailableSubjects();
     }
+    @GetMapping("/getAllStudentsByDepartment/{departmentName}")
+    public List<UserDTO> getAllStudentsByDepartment(@PathVariable String departmentName){
+        return userService.getAllStudentsByDepartment(departmentName);
+    }
 
     @GetMapping("/getCurrentUser")
     public UserDTO getCurrentUser(){

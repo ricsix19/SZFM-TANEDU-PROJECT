@@ -1,5 +1,6 @@
 package org.example.tanedu.Repository;
 
+import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.Department;
 import org.example.tanedu.Model.Role;
 import org.example.tanedu.Model.User;
@@ -16,4 +17,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findAllByRole(Role role);
 
     List<User> findAllByDepartmentAndRole(Department department, Role role);
+
+    List<User> findAllByDepartment(Department department);
 }
