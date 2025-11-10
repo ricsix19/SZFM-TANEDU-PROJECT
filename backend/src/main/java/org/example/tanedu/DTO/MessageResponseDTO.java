@@ -19,6 +19,7 @@ public class MessageResponseDTO {
     private Long receiverId;
     private String receiverFullName;
     private String receiverEmail;
+    private Long deptId;
     private LocalDateTime createdAt;
 
     public MessageResponseDTO(Message message) {
@@ -30,6 +31,7 @@ public class MessageResponseDTO {
         this.receiverId = message.getReceiver() != null ? message.getReceiver().getId() : null;
         this.receiverFullName = message.getReceiver() != null ? message.getReceiver().getFullName() : null;
         this.receiverEmail = message.getReceiver() != null ? message.getReceiver().getEmail() : null;
+        this.deptId = message.getDepartment() != null ? message.getDepartment().getId() : null;
         this.createdAt = message.getCreatedAt();
     }
 }

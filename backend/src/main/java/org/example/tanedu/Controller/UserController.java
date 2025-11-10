@@ -1,5 +1,6 @@
 package org.example.tanedu.Controller;
 
+import org.example.tanedu.DTO.TeacherEmailDTO;
 import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.Role;
 import org.example.tanedu.Model.Subject;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/getAllTeachersEmail")
-    public List<String> getAllTeacherEmails(){
+    public List<TeacherEmailDTO> getAllTeacherEmails(){
         return userService.getAllTeacherEmails();
     }
     @GetMapping("/getAllStudentsEmail")

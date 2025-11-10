@@ -29,6 +29,10 @@ public class Message {
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;

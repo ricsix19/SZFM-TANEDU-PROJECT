@@ -17,6 +17,7 @@ public class UserDTO {
     private Date birthDate;
     private String role;
     private String departmentName;
+    private Long deptId;
     private String fullName;
     private String subject;
     private String classLeaderOf;
@@ -32,6 +33,7 @@ public class UserDTO {
         this.subject = u.getSubject() != null ? u.getSubject().name() : null;
         Department dept = u.getDepartment();
         this.departmentName = dept != null ? dept.getName() : null;
+        this.deptId = dept != null ? dept.getId() : null;
 
         Department classLeaderDept = u.getClassLeaderOf();
         this.classLeaderOf = classLeaderDept != null ? classLeaderDept.getName() : null;

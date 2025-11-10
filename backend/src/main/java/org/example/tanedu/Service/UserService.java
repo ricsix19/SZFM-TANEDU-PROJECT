@@ -1,6 +1,7 @@
 // language: java
 package org.example.tanedu.Service;
 
+import org.example.tanedu.DTO.TeacherEmailDTO;
 import org.example.tanedu.DTO.UserDTO;
 import org.example.tanedu.Model.Department;
 import org.example.tanedu.Model.Role;
@@ -39,9 +40,11 @@ public class UserService {
         return foundUser.getRole();
     }
 
-    public List<String> getAllTeacherEmails(){
+    public List<TeacherEmailDTO> getAllTeacherEmails(){
         List<User> foundTeachers = userRepository.findAllByRole(Role.TEACHER);
-        return foundTeachers.stream().map(User::getEmail).collect(Collectors.toList());
+        return foundTeachers.stream()
+                .map(u -> new TeacherEmailDTO(u.getEmail(), u.getSubject()))
+                .collect(Collectors.toList());
     }
     public List<String> getAllStudentsEmail(){
         List<User> foundTeachers = userRepository.findAllByRole(Role.STUDENT);
