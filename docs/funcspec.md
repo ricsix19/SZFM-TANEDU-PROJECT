@@ -71,7 +71,7 @@ A rendszer célja, hogy oktatási környezetben működő tanulmányi adminisztr
 
 ## 4. Nem-funkcionális követelmények  
 
-- **Biztonság**: jelszókezelés, HTTPS, jogosultságkezelés  
+- **Biztonság**: jelszókezelés, jogosultságkezelés  
 - **Teljesítmény**: gyors válaszidő, cache  
 - **Használhatóság**: áttekinthető UI, reszponzív felület  
 - **Bővíthetőség**: moduláris kialakítás  
