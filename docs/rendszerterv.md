@@ -1,4 +1,4 @@
-# TanEdu – Rendszerterv
+# TanEDU – Rendszerterv
 
 ## 1. A rendszer célja
 A rendszer célja, hogy a hallgatók, oktatók és adminisztrátorok számára egy központi, 
@@ -54,7 +54,7 @@ biztonságos és felhasználóbarát felületet biztosítson a tanulmányi ügye
 
 ### 6.1 Felhasználói regisztráció kezelése
 
-A TanEdu rendszerben a felhasználói fiókok **nem online önregisztráció** útján jönnek létre.  
+A TanEDU rendszerben a felhasználói fiókok **nem online önregisztráció** útján jönnek létre.  
 A hallgatók és oktatók hozzáférését az intézmény **rendszergazdája (SYSADMIN)** hozza létre és kezeli.
 
 ---

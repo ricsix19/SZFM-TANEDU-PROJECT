@@ -1,4 +1,4 @@
-# Definition of Done (DoD) — TanEdu
+# Definition of Done (DoD) — TanEDU
 
 A DoD lista meghatározza, mikor tekintünk egy feladatot késznek.
 

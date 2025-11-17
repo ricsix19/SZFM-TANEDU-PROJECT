@@ -1,5 +1,5 @@
 # 📄 Proof of Concept – Messenger Megosztási Funkció (Share Grade Feature)
-**Projekt:** TanEdu  
+**Projekt:** TanEDU  
 **Dátum:** 2025.11.20  
 **Státusz:** PoC – Megvalósítása jelenleg nem lehetséges  
 
@@ -7,7 +7,7 @@
 
 ## 🎯 1. A funkció célja
 
-A TanEdu rendszerbe egy olyan megosztási funkció beépítését terveztük, amely lehetővé tette volna, hogy:
+A TanEDU rendszerbe egy olyan megosztási funkció beépítését terveztük, amely lehetővé tette volna, hogy:
 
 - a diák **a kapott jegyét egy gombnyomással megossza Messengerben**,  
 - a Messenger felülete megnyíljon, ahol kiválaszthatja a címzettet,

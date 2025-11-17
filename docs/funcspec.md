@@ -1,4 +1,4 @@
-# Funkcionális specifikáció — TanEdu
+# Funkcionális specifikáció — TanEDU
 
 ## 1. Bevezetés  
 

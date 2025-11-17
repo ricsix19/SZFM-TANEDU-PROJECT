@@ -1,7 +1,7 @@
 Feature: Felhasználói fiók létrehozása
 
   Scenario: Új felhasználói fiók sikeres létrehozása rendszergazda által
-    Given a rendszergazda be van jelentkezve a TanEdu rendszerbe
+    Given a rendszergazda be van jelentkezve a TanEDU rendszerbe
     And a rendszergazda megnyitja a "Felhasználók kezelése" oldalt
     When a rendszergazda megadja az új felhasználó teljes nevét
     And megadja az e-mail címét

@@ -1,4 +1,4 @@
-# TanEdu — Követelmény Specifikáció
+# TanEDU — Követelmény Specifikáció
 
 ### Áttekintés
 
