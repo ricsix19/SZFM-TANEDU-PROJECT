@@ -70,18 +70,18 @@ A projekt célja egy olyan webes rendszer létrehozása, amely:
 
 ### Követelmény lista
 
-| Modul          | Név                | Kifejtés                                                                 |
-|----------------|--------------------|------------------------------------------------------------------------|
-| Jogosultság    | Bejelentkezés      | Email/jelszó alapú belépés, hibás próbálkozás esetén hibaüzenet.        |
-| Felhasználói   | Tantárgymegjelenítés   | A diák csak azokat a tantárgyakat látja amelyekhez a Rendszergazda hozzárendelte |
-| Felhasználói   | Jegymegtekintés    | A diák saját jegyeit és statisztikáit láthatja.                     |
-| Oktatói        | Jegybeírás         | Az oktató rögzítheti, módosíthatja a diákok eredményeit.             |
-| Oktatói        | Témazárók kezelése   | Oktató Témazárókat írhat ki, időponttal.       |
-| Rendszergazda | Felhasználókezelés | Rendszergazda felveszi, törli és jogosultsággal látja el az Oktatókat.      |
-| Rendszergazda | Tantárgykezelés    | Rendszergazda létrehozhat, módosíthat vagy törölhet tantárgyakat.               |
-| Egyéb          | Értesítések        | A rendszer automatikus üzeneteket küld (pl. Érdemjegy beírás).    |
-| Egyéb          | Statisztikák           | Rendszer készít statisztikákat a diákok átlaguk és jegyeik alapján.         |
-| Rendszer       | Naplózás           | Minden módosítás és tranzakció naplózásra kerül.                        |
+| ID | Cím | Leírás | Prioritás | Elfogadási kritérium |
+|----|-----|--------|----------:|---------------------|
+| K001 | Bejelentkezés / JWT auth | Email/jelszó alapú bejelentkezés, JWT token kiadása | Magas | Sikeres bejelentkezéskor érvényes JWT, védett endpointokhoz szükséges token |
+| K002 | Regisztráció | Diák regisztráció (admin jóváhagyással vagy előregenerált fiókkal) | Magas | Új felhasználó felvétele megtörténik és beléphet, e-mail formátum validáció |
+| K003 | Jogosultságkezelés | Szerepek: DIÁK, OKTATÓ, ADMIN; jogosultságok védik a műveleteket | Magas | Csak jogosult szerep hajthat végre admin/oktatói műveleteket |
+| K004 | Jegykezelés | Oktatók jegyeket rögzíthetnek és módosíthatnak; diákok megtekintik jegyeiket | Magas | Jegy megjelenik diák profilján, módosítás naplózva |
+| K005 | Órarend megtekintés | Diákok és oktatók látják az órarendjüket | Közepes | Heti nézet generálható és ütközés-ellenőrzés fut |
+| K006 | Üzenetküldés | Oktatók és diákok üzeneteket küldhetnek; értesítések | Közepes | Üzenet kerül elmentésre, címzett megkapja, olvasottság nyomon követhető |
+| K007 | Fájl feltöltés | Oktatók/diákok fájlokat tölthetnek fel (Cloudinary/ helyi tároló) | Közepes | Sikeres feltöltés URL-el tárolva, méret- és típusellenőrzés |
+| K008 | Tantárgy- és kurzuskezelés | Admin létrehozza, módosítja, törli a kurzusokat és hozzárendeli oktatókat | Közepes | Kurzusról adatok lekérdezhetők, oktató hozzárendelés működik |
+| K009 | Naplózás / Audit | Minden fontos művelet naplózása (CRUD) | Közepes | Naplókban szerepel a felhasználó, művelet, időpont és eredmény |
+| K010 | Teljesítmény | API válaszidő és skálázhatóság | Alacsony | Tipikus API hívás < 500ms fejlesztési környezetben (terhelés nélkül) |
 
 ### Fogalomtár
 
