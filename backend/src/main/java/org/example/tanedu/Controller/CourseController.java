@@ -87,6 +87,11 @@ public class CourseController {
         return courseService.updateCourseDayById(id,day);
     }
 
+    @PutMapping("/updateCourseSubstituteTeacherById/{id}")
+    public CourseDTO updateCourseSubstituteTeacherById(@PathVariable Long id, @RequestParam String email){
+        return courseService.updateCourseSubstituteTeacherById(id,email);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createCourse(@RequestBody Course course){
         return courseService.createCourse(course);

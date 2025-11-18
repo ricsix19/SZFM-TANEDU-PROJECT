@@ -25,6 +25,10 @@ public class Course {
     private User teacher;
 
     @ManyToOne
+    @JoinColumn(name = "substitute_teacher_id")
+    private User substituteTeacher;
+
+    @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
 }

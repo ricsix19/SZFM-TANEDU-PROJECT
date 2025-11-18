@@ -1,10 +1,7 @@
 package org.example.tanedu.Service;
 
 import org.example.tanedu.DTO.CourseDTO;
-import org.example.tanedu.Model.Course;
-import org.example.tanedu.Model.Department;
-import org.example.tanedu.Model.Subject;
-import org.example.tanedu.Model.User;
+import org.example.tanedu.Model.*;
 import org.example.tanedu.Repository.CourseRepository;
 import org.example.tanedu.Repository.DepartmentRepository;
 import org.example.tanedu.Repository.UserRepository;
@@ -169,6 +166,26 @@ public class CourseService {
         if(duration != null) foundCourse.setDay(duration);
 
         return courseRepository.save(foundCourse);
+    }
+
+    public CourseDTO updateCourseSubstituteTeacherById(Long id, String email){
+        Course foundCourse = courseRepository.findById(id).orElseThrow(()->new RuntimeException("No course found with id: "+id));
+
+        if (email == null) {
+            foundCourse.setSubstituteTeacher(null);
+        } else {
+            User foundTeacher = userRepository.findByEmail(email);
+            if (foundTeacher == null) {
+                throw new RuntimeException("Teacher not found with email: " + email);
+            }
+            if (foundTeacher.getRole() == Role.STUDENT) {
+                throw new RuntimeException("Selected user is a student and cannot be assigned as a substitute teacher");
+            }
+            foundCourse.setSubstituteTeacher(foundTeacher);
+        }
+
+        Course saved = courseRepository.save(foundCourse);
+        return new CourseDTO(saved);
     }
 
     public String deleteCourseById(Long id){

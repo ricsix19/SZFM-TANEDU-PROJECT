@@ -12,6 +12,7 @@ public class CourseDTO {
     private String day;
     private String duration;
     private String teacherName;
+    private String substituteTeacher;
     private String departmentName;
 
     public CourseDTO (Course course){
@@ -20,6 +21,8 @@ public class CourseDTO {
         this.day = course.getDay();
         this.duration = course.getDuration();
         this.teacherName = course.getTeacher() != null ? course.getTeacher().getFullName() : "No teacher assigned";
+        this.substituteTeacher = course.getSubstituteTeacher() != null ? course.getSubstituteTeacher().getFullName() : null;
+
         this.departmentName = course.getDepartment() != null ? course.getDepartment().getName()
                 : "No department assigned";
     }
