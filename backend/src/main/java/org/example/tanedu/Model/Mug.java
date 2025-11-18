@@ -9,37 +9,33 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity
+
+
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name="messages")
-public class Message {
+@NoArgsConstructor
+@Entity
+@Table(name = "mug_sends")
+public class Mug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String value;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private User sender;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "receiver_id")
-    private User receiver;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public Message(User sender, User receiver, String value) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.value = value;
+    public Mug(User user, Course course) {
+        this.user = user;
+        this.course = course;
     }
 }
